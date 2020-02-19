@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Models\Object;
+use App\Models\Entity;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
-class ObjectApiController extends ApiBaseController
+class EntityApiController extends ApiBaseController
 {
     public $successStatus = 200;
     
@@ -22,7 +22,7 @@ class ObjectApiController extends ApiBaseController
 
     public function index()
     {
-        return $this->sendResponse(Object::select('uuid', 'name')->get()->toArray(), 'Object list');
+        return $this->sendResponse(Entity::select('uuid', 'name')->where('client_id', auth('api')->user()->id)->get()->toArray(), 'Entity list');
     }
 
     public function store(Request $request)
@@ -37,7 +37,7 @@ class ObjectApiController extends ApiBaseController
 
         try {
             DB::transaction(function () use ($request) {
-                $this->obj = Object::create([
+                $this->obj = Entity::create([
                     'uuid' => Str::uuid(),
                     'name' => $request->name
                 ]);
@@ -46,21 +46,21 @@ class ObjectApiController extends ApiBaseController
             return $th;
         }
 
-        return $this->sendResponse([$this->obj], 'Object created');
+        return $this->sendResponse([$this->obj], 'Entity created');
     }
 
     public function delete(Request $request)
     {
         $validator = Validator::make($request->all(), [ 
-            'uuid' => 'required|uuid|exists:objects',
+            'uuid' => 'required|uuid|exists:entities',
         ]);
         
         if ($validator->fails()) { 
             return response()->json(['errors'=>$validator->errors()], 401);            
         }
 
-        $obj = Object::where('uuid', $request->uuid)->delete();
+        $obj = Entity::where('uuid', $request->uuid)->delete();
 
-        return $this->sendResponse([$obj], 'Object deleted');
+        return $this->sendResponse([$obj], 'Entity deleted');
     }
 }
