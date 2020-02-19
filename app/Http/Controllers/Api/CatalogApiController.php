@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Models\Catalog;
 use App\Models\Category;
+use App\Models\Item;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -36,6 +37,20 @@ class CatalogApiController extends ApiBaseController
 
         $catalog = Catalog::where('uuid', $request->uuid)->first('id')->id;
         return $this->sendResponse(Category::select('uuid', 'name', 'photo')->where('catalog_id', $catalog)->get()->toArray(), 'Category list');
+    }
+
+    public function getItemsByCategory(Request $request)
+    {
+        $validator = Validator::make($request->all(), [ 
+            'uuid' => 'required|exists:categories',
+        ]);
+        
+        if ($validator->fails()) { 
+            return response()->json(['errors'=>$validator->errors()], 401);            
+        }
+
+        $category = Category::where('uuid', $request->uuid)->first('id')->id;
+        return $this->sendResponse(Item::select('uuid', 'name', 'photo')->where('category_id', $category)->get()->toArray(), 'Items list');
     }
     
     
