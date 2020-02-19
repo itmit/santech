@@ -39,6 +39,7 @@ class EntityApiController extends ApiBaseController
             DB::transaction(function () use ($request) {
                 $this->obj = Entity::create([
                     'uuid' => Str::uuid(),
+                    'client_id' => auth('api')->user()->id,
                     'name' => $request->name
                 ]);
             });
