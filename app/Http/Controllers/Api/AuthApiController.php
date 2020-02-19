@@ -67,6 +67,11 @@ class AuthApiController extends ApiBaseController
         return response()->json(['error'=>'Не удалось авторизоваться'], 401);     
     }
 
+    public function test()
+    {
+        return 'success';
+    }
+
     /** 
      * login api 
      * 
