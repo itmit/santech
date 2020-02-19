@@ -38,7 +38,7 @@ class AuthApiController extends ApiBaseController
                     'uuid' => Str::uuid(),
                     'name' => $request->name,
                     'email' => $request->email,
-                    'password' => Hash::make($this->password),
+                    'password' => Hash::make($request->password),
                 ]);
             });
         } catch (\Throwable $th) {
