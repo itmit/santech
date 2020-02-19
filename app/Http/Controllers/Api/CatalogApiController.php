@@ -20,7 +20,7 @@ class CatalogApiController extends ApiBaseController
 
     public function getCatalog()
     {
-        return $this->sendResponse(Catalog::all()->toArray());
+        return $this->sendResponse(Catalog::all()->toArray(), 'Catalog list');
     }
     
 }
