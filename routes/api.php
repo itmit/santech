@@ -20,6 +20,7 @@ Route::post('logout', 'Api\AuthApiController@logout');
 Route::group(['middleware' => 'auth:api'], function(){
 
     Route::resource('catalog', 'Api\CatalogApiController');
+    Route::post('catalog/category', 'Api\CatalogApiController@getCategoriesByCatalog');
 
     Route::get('test', 'Api\AuthApiController@test');
     
