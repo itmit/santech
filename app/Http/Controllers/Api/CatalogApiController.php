@@ -35,7 +35,7 @@ class CatalogApiController extends ApiBaseController
         }
 
         $catalog = Catalog::where('uuid', $request->uuid)->first('id')->id;
-        return $this->sendResponse(Category::where('catalog_id', $catalog)->get()->toArray(), 'Category list');
+        return $this->sendResponse(Category::select('uuid', 'name', 'photo')->where('catalog_id', $catalog)->get()->toArray(), 'Category list');
     }
     
     
