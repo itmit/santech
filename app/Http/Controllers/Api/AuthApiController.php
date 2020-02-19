@@ -80,21 +80,15 @@ class AuthApiController extends ApiBaseController
     public function login(Request $request) { 
 
         $validator = Validator::make($request->all(), [ 
-            // 'phone' => 'required|max:18|min:18',
-            'phone' => 'required',
+            'email' => 'required|exists:clients',
             'password' => 'required|min:6',
         ]);
         
         if ($validator->fails()) { 
             return response()->json(['errors'=>$validator->errors()], 401);            
-        }
+        }    
 
-        if(!Client::where('phone', '=', $request->phone)->exists())
-        {
-            return response()->json(['error'=>'Такого пользователя не существует'], 401); 
-        }       
-
-        $client = Client::where('phone', '=', $request->phone)->first();
+        $client = Client::where('email', '=', $request->email)->first();
 
         if(Hash::check($request->password, $client->password))
         {
@@ -114,11 +108,11 @@ class AuthApiController extends ApiBaseController
 
                 return $this->sendResponse([
                     'access_token' => $tokenResult->accessToken,
-                    'client' => $client,
                     'token_type' => 'Bearer',
                     'expires_at' => Carbon::parse(
                         $tokenResult->token->expires_at
                     )->toDateTimeString(),
+                    'client' => $client
                 ],
                     'Authorization is successful');
             }
