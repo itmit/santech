@@ -42,7 +42,7 @@ class AuthApiController extends ApiBaseController
                 ]);
             });
         } catch (\Throwable $th) {
-            return response()->json(['errors'=>$th], 401);
+            $th;
         }
 
         Auth::login($this->user);     
