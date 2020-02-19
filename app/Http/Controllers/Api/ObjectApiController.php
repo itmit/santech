@@ -2,9 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Models\Catalog;
-use App\Models\Category;
-use App\Models\Item;
+use App\Models\Object;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -16,42 +14,53 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
-class CatalogApiController extends ApiBaseController
+class ObjectApiController extends ApiBaseController
 {
     public $successStatus = 200;
+    
+    private $obj;
 
     public function index()
     {
-        return $this->sendResponse(Catalog::select('uuid', 'name', 'photo')->get()->toArray(), 'Catalog list');
+        return $this->sendResponse(Object::select('uuid', 'name')->get()->toArray(), 'Object list');
     }
 
-    public function getCategoriesByCatalog(Request $request)
+    public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [ 
-            'uuid' => 'required|uuid|exists:catalogs',
+            'name' => 'required|string|min:2|max:191',
         ]);
         
         if ($validator->fails()) { 
             return response()->json(['errors'=>$validator->errors()], 401);            
         }
 
-        $catalog = Catalog::where('uuid', $request->uuid)->first('id')->id;
-        return $this->sendResponse(Category::select('uuid', 'name', 'photo')->where('catalog_id', $catalog)->get()->toArray(), 'Category list');
+        try {
+            DB::transaction(function () use ($request) {
+                $this->obj = Object::create([
+                    'uuid' => Str::uuid(),
+                    'name' => $request->name
+                ]);
+            });
+        } catch (\Throwable $th) {
+            return $th;
+        }
+
+        return $this->sendResponse([$this->obj], 'Object created');
     }
 
-    public function getItemsByCategory(Request $request)
+    public function delete(Request $request)
     {
         $validator = Validator::make($request->all(), [ 
-            'uuid' => 'required|uuid|exists:categories',
+            'uuid' => 'required|uuid|exists:objects',
         ]);
         
         if ($validator->fails()) { 
             return response()->json(['errors'=>$validator->errors()], 401);            
         }
 
-        $category = Category::where('uuid', $request->uuid)->first('id')->id;
-        return $this->sendResponse(Item::select('uuid', 'name', 'photo')->where('category_id', $category)->get()->toArray(), 'Items list');
+        $obj = Object::where('uuid', $request->uuid)->delete();
+
+        return $this->sendResponse([$obj], 'Object deleted');
     }
-    
-    
 }

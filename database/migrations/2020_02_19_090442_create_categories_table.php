@@ -20,6 +20,7 @@ class CreateCategoriesTable extends Migration
             $table->string('name');
             $table->text('photo');
             $table->timestamps();
+            $table->softDeletes();
 
             $table->foreign('catalog_id')->references('id')->on('catalogs');
         });

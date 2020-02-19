@@ -19,6 +19,7 @@ class CreateCatalogsTable extends Migration
             $table->string('name');
             $table->text('photo');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

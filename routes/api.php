@@ -23,6 +23,8 @@ Route::group(['middleware' => 'auth:api'], function(){
     Route::post('catalog/category', 'Api\CatalogApiController@getCategoriesByCatalog');
     Route::post('catalog/category/item', 'Api\CatalogApiController@getItemsByCategory');
 
+    Route::resource('object', 'Api\ObjectApiController');
+
     Route::get('test', 'Api\AuthApiController@test');
     
 });
