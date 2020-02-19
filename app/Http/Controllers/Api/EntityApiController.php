@@ -49,7 +49,7 @@ class EntityApiController extends ApiBaseController
         return $this->sendResponse([$this->obj], 'Entity created');
     }
 
-    public function delete(Request $request)
+    public function destroy(Request $request)
     {
         $validator = Validator::make($request->all(), [ 
             'uuid' => 'required|uuid|exists:entities',
