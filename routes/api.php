@@ -19,6 +19,6 @@ Route::post('logout', 'Api\AuthApiController@logout');
 
 Route::group(['middleware' => 'auth:api'], function(){
 
-
+    Route::get('test', 'Api\AuthApiController@test');
     
 });
