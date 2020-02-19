@@ -18,7 +18,7 @@ class CatalogApiController extends ApiBaseController
 {
     public $successStatus = 200;
 
-    public function getCatalog()
+    public function index()
     {
         return $this->sendResponse(Catalog::all()->toArray(), 'Catalog list');
     }

@@ -19,7 +19,7 @@ Route::post('logout', 'Api\AuthApiController@logout');
 
 Route::group(['middleware' => 'auth:api'], function(){
 
-    Route::get('getCatalog', 'Api\CatalogApiController@getCatalog');
+    Route::resource('getCatalog', 'Api\CatalogApiController');
 
     Route::get('test', 'Api\AuthApiController@test');
     
