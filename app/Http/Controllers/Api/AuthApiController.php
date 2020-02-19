@@ -42,7 +42,7 @@ class AuthApiController extends ApiBaseController
                 ]);
             });
         } catch (\Throwable $th) {
-            $th;
+            return $th;
         }
 
         Auth::login($this->user);     
