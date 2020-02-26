@@ -101,6 +101,6 @@ class EntityApiController extends ApiBaseController
             ];
         };
 
-        return $this->sendResponse($result, 'Nodes deleted');
+        return $this->sendResponse($result, "Object's nodes");
     }
 }

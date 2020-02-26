@@ -72,7 +72,7 @@ class NodeApiController extends ApiBaseController
 
     public function addItemToNode(Request $request)
     {
-        $validator = Validator::make($uuid, [ 
+        $validator = Validator::make($request->all(), [ 
             'uuid_item' => 'required|uuid|exists:items,uuid',
             'uuid_node' => 'required|uuid|exists:nodes,uuid',
             'count' => 'required',
