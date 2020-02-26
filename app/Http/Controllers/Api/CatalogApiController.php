@@ -56,8 +56,8 @@ class CatalogApiController extends ApiBaseController
     public function getItem($uuid)
     {        
 
-        if(!Item::where('uuid', $uuid)->exists()) return response()->json(['errors'=>$validator->errors()], 400);            
+        if(!Item::where('uuid', $uuid)->exists()) return response()->json(['error'=>'Такой позиции не существует'], 400);            
         
-        return $this->sendResponse(Item::select('id', 'uuid', 'name', 'photo')->where('uuid', $uuid)->first(), 'Item');
+        return $this->sendResponse(Item::select('id', 'uuid', 'name', 'photo')->where('uuid', $uuid)->first()->toArray(), 'Item');
     }
 }
