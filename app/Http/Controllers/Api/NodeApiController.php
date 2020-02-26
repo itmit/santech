@@ -71,19 +71,19 @@ class NodeApiController extends ApiBaseController
     //     return $this->sendResponse([$obj], 'Entity deleted');
     // }
 
-    public function addItemToNode(Request $request)
-    {
-        $validator = Validator::make($uuid, [ 
-            'uuid_item' => 'required|uuid|exists:items,uuid',
-            'uuid_node' => 'required|uuid|exists:nodes,uuid',
-        ]);
+    // public function addItemToNode(Request $request)
+    // {
+    //     $validator = Validator::make($uuid, [ 
+    //         'uuid_item' => 'required|uuid|exists:items,uuid',
+    //         'uuid_node' => 'required|uuid|exists:nodes,uuid',
+    //     ]);
         
-        if ($validator->fails()) { 
-            return response()->json(['errors'=>$validator->errors()], 401);            
-        }
+    //     if ($validator->fails()) { 
+    //         return response()->json(['errors'=>$validator->errors()], 401);            
+    //     }
 
-        $node = Node::where('')
+    //     $node = Node::where('')
 
-        return $this->sendResponse(Item::select('id', 'uuid', 'name', 'photo')->where('uuid', $uuid)->first(), 'Item');
-    }
+    //     return $this->sendResponse(Item::select('id', 'uuid', 'name', 'photo')->where('uuid', $uuid)->first(), 'Item');
+    // }
 }
