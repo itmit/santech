@@ -52,7 +52,7 @@ class EntityApiController extends ApiBaseController
                 $nodeObj = Node::create([
                     'entity_id' => $this->obj->id,
                     'uuid' => Str::uuid(),
-                    'name' => $node->name
+                    'name' => $node['name']
                 ]);
             }
         } catch (\Throwable $th) {
