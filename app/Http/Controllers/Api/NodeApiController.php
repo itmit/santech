@@ -104,7 +104,7 @@ class NodeApiController extends ApiBaseController
     {
         $validator = Validator::make($request->all(), [ 
             'uuid' => 'required|uuid|exists:nodes',
-            'uuid_to' => 'required|uuid|exists:entities',
+            'uuid_to' => 'required|uuid|exists:entities,uuid',
         ]);
         
         if ($validator->fails()) { 
