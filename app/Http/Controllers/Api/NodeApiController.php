@@ -90,7 +90,7 @@ class NodeApiController extends ApiBaseController
 
         NodeItem::create([
             'node_id' => $node->id,
-            'item' => $item->id,
+            'item_id' => $item->id,
             'uuid' => Str::uuid(),
             'count' => $request->count,
             'amount' => $request->amount,
