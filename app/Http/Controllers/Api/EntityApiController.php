@@ -37,7 +37,7 @@ class EntityApiController extends ApiBaseController
             return response()->json(['errors'=>$validator->errors()], 400);            
         }
 
-        return $this->sendResponse($request->data, 'test');
+        // return $this->sendResponse($request->data, 'test');
 
         try {
             DB::transaction(function () use ($request) {
