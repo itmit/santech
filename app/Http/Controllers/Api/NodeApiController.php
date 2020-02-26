@@ -18,17 +18,15 @@ use Illuminate\Support\Str;
 class NodeApiController extends ApiBaseController
 {
     public $successStatus = 200;
-    
-    private $obj;
 
     public function index()
     {
         return $this->sendResponse(
             Entity::where('client_id', auth('api')->user()->id)
             ->join('nodes', 'entities.id', '=', 'nodes.entity_id')
-            ->select('nodes.uuid', 'nodes.name', 'entities.name')
+            ->select(['nodes.uuid AS uuid', 'nodes.name AS node_name', 'entities.name AS entity_name'])
             ->get()->toArray(),
-            'Entity list');
+            'Entity + node list');
     }
 
     // public function store(Request $request)
