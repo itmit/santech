@@ -26,7 +26,7 @@ class NodeApiController extends ApiBaseController
         return $this->sendResponse(
             Entity::where('client_id', auth('api')->user()->id)
             ->join('nodes', 'entities.id', '=', 'nodes.entity_id')
-            ->select('nodes.uuid', 'nodes.name', 'entities.name')->
+            ->select('nodes.uuid', 'nodes.name', 'entities.name')
             ->get()->toArray(),
             'Entity list');
     }
