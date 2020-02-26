@@ -55,7 +55,7 @@ class CatalogApiController extends ApiBaseController
 
     public function getItem($uuid)
     {
-        $validator = Validator::make($uuid, [ 
+        $validator = Validator::make([$uuid], [ 
             'uuid' => 'required|uuid|exists:items',
         ]);
         
