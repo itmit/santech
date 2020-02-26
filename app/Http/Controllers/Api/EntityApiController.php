@@ -73,16 +73,16 @@ class EntityApiController extends ApiBaseController
 
     public function destroy(Request $request)
     {
-        $validator = Validator::make($request->all(), [ 
-            'uuid' => 'required|uuid|exists:entities',
-        ]);
+        // $validator = Validator::make($request->all(), [ 
+        //     'uuid' => 'required|uuid|exists:entities',
+        // ]);
         
-        if ($validator->fails()) { 
-            return response()->json(['errors'=>$validator->errors()], 401);            
-        }
+        // if ($validator->fails()) { 
+        //     return response()->json(['errors'=>$validator->errors()], 401);            
+        // }
 
-        $obj = Entity::where('uuid', $request->uuid)->delete();
+        // $obj = Entity::where('uuid', $request->uuid)->delete();
 
-        return $this->sendResponse([$obj], 'Entity deleted');
+        // return $this->sendResponse([$obj], 'Entity deleted');
     }
 }

@@ -65,6 +65,4 @@ class CatalogApiController extends ApiBaseController
 
         return $this->sendResponse(Item::select('id', 'uuid', 'name', 'photo')->where('uuid', $uuid)->first(), 'Item');
     }
-    
-    
 }

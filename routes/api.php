@@ -26,6 +26,8 @@ Route::group(['middleware' => 'auth:api'], function(){
 
     Route::resource('entity', 'Api\EntityApiController');
 
+    Route::resource('node', 'Api\NodeApiController');
+
     Route::get('test', 'Api\AuthApiController@test');
     
 });

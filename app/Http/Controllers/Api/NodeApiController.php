@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Models\Node;
 use App\Models\Entity;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -22,46 +23,67 @@ class NodeApiController extends ApiBaseController
 
     public function index()
     {
-        return $this->sendResponse(Entity::select('uuid', 'name')->where('client_id', auth('api')->user()->id)->get()->toArray(), 'Entity list');
+        return $this->sendResponse(
+            Entity::where('client_id', auth('api')->user()->id)
+            ->join('nodes', 'entities.id', '=', 'nodes.entity_id')
+            ->select('nodes.uuid', 'nodes.name', 'entities.name')->
+            ->get()->toArray(),
+            'Entity list');
     }
 
-    public function store(Request $request)
+    // public function store(Request $request)
+    // {
+    //     $validator = Validator::make($request->all(), [ 
+    //         'name' => 'required|string|min:2|max:191',
+    //     ]);
+        
+    //     if ($validator->fails()) { 
+    //         return response()->json(['errors'=>$validator->errors()], 401);            
+    //     }
+
+    //     try {
+    //         DB::transaction(function () use ($request) {
+    //             $this->obj = Entity::create([
+    //                 'uuid' => Str::uuid(),
+    //                 'client_id' => auth('api')->user()->id,
+    //                 'name' => $request->name
+    //             ]);
+    //         });
+    //     } catch (\Throwable $th) {
+    //         return $th;
+    //     }
+
+    //     return $this->sendResponse([$this->obj], 'Entity created');
+    // }
+
+    // public function destroy(Request $request)
+    // {
+    //     $validator = Validator::make($request->all(), [ 
+    //         'uuid' => 'required|uuid|exists:entities',
+    //     ]);
+        
+    //     if ($validator->fails()) { 
+    //         return response()->json(['errors'=>$validator->errors()], 401);            
+    //     }
+
+    //     $obj = Entity::where('uuid', $request->uuid)->delete();
+
+    //     return $this->sendResponse([$obj], 'Entity deleted');
+    // }
+
+    public function addItemToNode(Request $request)
     {
-        $validator = Validator::make($request->all(), [ 
-            'name' => 'required|string|min:2|max:191',
+        $validator = Validator::make($uuid, [ 
+            'uuid_item' => 'required|uuid|exists:items,uuid',
+            'uuid_node' => 'required|uuid|exists:nodes,uuid',
         ]);
         
         if ($validator->fails()) { 
             return response()->json(['errors'=>$validator->errors()], 401);            
         }
 
-        try {
-            DB::transaction(function () use ($request) {
-                $this->obj = Entity::create([
-                    'uuid' => Str::uuid(),
-                    'client_id' => auth('api')->user()->id,
-                    'name' => $request->name
-                ]);
-            });
-        } catch (\Throwable $th) {
-            return $th;
-        }
+        $node = Node::where('')
 
-        return $this->sendResponse([$this->obj], 'Entity created');
-    }
-
-    public function destroy(Request $request)
-    {
-        $validator = Validator::make($request->all(), [ 
-            'uuid' => 'required|uuid|exists:entities',
-        ]);
-        
-        if ($validator->fails()) { 
-            return response()->json(['errors'=>$validator->errors()], 401);            
-        }
-
-        $obj = Entity::where('uuid', $request->uuid)->delete();
-
-        return $this->sendResponse([$obj], 'Entity deleted');
+        return $this->sendResponse(Item::select('id', 'uuid', 'name', 'photo')->where('uuid', $uuid)->first(), 'Item');
     }
 }
