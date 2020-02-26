@@ -18,12 +18,12 @@ class Node extends Model
 
     public function getItems()
     {
-        // $this->hasMany(NodeItem::class, 'node_id')
-        // ->join('items', 'node_items.item_id', '=', 'items.id')
-        // ->select('items.name', 'node_items.count', 'node_items.amount')
-        // ->get()
-        // ->toArray();
+        return $this->hasMany(NodeItem::class, 'node_id')
+        ->join('items', 'node_items.item_id', '=', 'items.id')
+        ->select('items.name', 'node_items.count', 'node_items.amount')
+        ->get()
+        ->toArray();
 
-        return $this->hasMany(NodeItem::class, 'node_id')->get();
+        // return $this->hasMany(NodeItem::class, 'node_id')->get();
     }
 }
