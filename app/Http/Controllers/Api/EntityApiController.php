@@ -92,6 +92,15 @@ class EntityApiController extends ApiBaseController
 
         $nodes = Node::where('entity_id', $entity->id)->get()->toArray();
 
-        return $this->sendResponse($nodes, 'Nodes deleted');
+        $result = [];
+
+        foreach ($nodes as $node) {
+            $result[] = [
+                'node' => $node->name,
+                'items' => $node->getItems()
+            ];
+        };
+
+        return $this->sendResponse($result, 'Nodes deleted');
     }
 }
