@@ -54,15 +54,10 @@ class CatalogApiController extends ApiBaseController
     }
 
     public function getItem($uuid)
-    {
-        $validator = Validator::make([$uuid], [ 
-            'uuid' => 'required|uuid|exists:items',
-        ]);
-        
-        if ($validator->fails()) { 
-            return response()->json(['errors'=>$validator->errors()], 401);            
-        }
+    {        
 
+        if(!Item::where('uuid', $uuid)->exists()) return response()->json(['errors'=>$validator->errors()], 400);            
+        
         return $this->sendResponse(Item::select('id', 'uuid', 'name', 'photo')->where('uuid', $uuid)->first(), 'Item');
     }
 }
