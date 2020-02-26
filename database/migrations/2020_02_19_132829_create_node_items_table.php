@@ -20,7 +20,7 @@ class CreateNodeItemsTable extends Migration
             $table->uuid('uuid');
             $table->integer('count')->unsigned();
             $table->integer('amount')->unsigned();
-            $table->text('description');
+            $table->text('description')->nullable();
             $table->timestamps();
             $table->softDeletes();
 

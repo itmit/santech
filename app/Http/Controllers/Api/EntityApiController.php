@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Models\Entity;
 use App\Models\Node;
+use App\Models\NodeItem;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -37,8 +38,6 @@ class EntityApiController extends ApiBaseController
             return response()->json(['errors'=>$validator->errors()], 400);            
         }
 
-        // return $this->sendResponse($request->data, 'test');
-
         try {
             DB::transaction(function () use ($request) {
                 $this->obj = Entity::create([
@@ -46,15 +45,25 @@ class EntityApiController extends ApiBaseController
                     'client_id' => auth('api')->user()->id,
                     'name' => $request->name
                 ]);
-            });
 
-            foreach ($request->data as $node) {
-                $nodeObj = Node::create([
-                    'entity_id' => $this->obj->id,
-                    'uuid' => Str::uuid(),
-                    'name' => $node['name']
-                ]);
-            }
+                foreach ($request->data as $node) {
+                    $nodeObj = Node::create([
+                        'entity_id' => $this->obj->id,
+                        'uuid' => Str::uuid(),
+                        'name' => $node['name']
+                    ]);
+                    foreach ($node['items'] as $item) {
+                        $nodeItm = NodeItem::create([
+                            'node_id' => $nodeObj->id,
+                            'item_id' => $item['id'],
+                            'uuid' => Str::uuid(),
+                            'count' => $item['count'],
+                            'amount' => $item['amount'],
+                            'description' => $item['description'],
+                        ]);
+                    }
+                }
+            });
         } catch (\Throwable $th) {
             return $th;
         }
