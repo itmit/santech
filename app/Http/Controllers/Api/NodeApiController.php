@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Api;
 
 use App\Models\Entity;
-use App\Models\Node;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -15,7 +14,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
-class EntityApiController extends ApiBaseController
+class NodeApiController extends ApiBaseController
 {
     public $successStatus = 200;
     
@@ -30,14 +29,11 @@ class EntityApiController extends ApiBaseController
     {
         $validator = Validator::make($request->all(), [ 
             'name' => 'required|string|min:2|max:191',
-            'data' => 'required|array',
         ]);
         
         if ($validator->fails()) { 
             return response()->json(['errors'=>$validator->errors()], 401);            
         }
-
-        return $this->sendResponse([$request->data], 'test');
 
         try {
             DB::transaction(function () use ($request) {
@@ -47,14 +43,6 @@ class EntityApiController extends ApiBaseController
                     'name' => $request->name
                 ]);
             });
-
-            foreach ($request->data as $node) {
-                $nodeObj = Node::create([
-                    'entity_id' => $this->obj->id,
-                    'uuid' => Str::uuid(),
-                    'name' => $node->name
-                ]);
-            }
         } catch (\Throwable $th) {
             return $th;
         }

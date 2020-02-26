@@ -52,6 +52,19 @@ class CatalogApiController extends ApiBaseController
         $category = Category::where('uuid', $request->uuid)->first('id')->id;
         return $this->sendResponse(Item::select('uuid', 'name', 'photo')->where('category_id', $category)->get()->toArray(), 'Items list');
     }
+
+    public function getItem($uuid)
+    {
+        $validator = Validator::make($uuid, [ 
+            'uuid' => 'required|uuid|exists:items',
+        ]);
+        
+        if ($validator->fails()) { 
+            return response()->json(['errors'=>$validator->errors()], 401);            
+        }
+
+        return $this->sendResponse(Item::select('id', 'uuid', 'name', 'photo')->where('uuid', $uuid)->first(), 'Item');
+    }
     
     
 }
