@@ -99,4 +99,46 @@ class NodeApiController extends ApiBaseController
 
         return $this->sendResponse([], 'Item added');
     }
+
+    public function copyNode(Request $request)
+    {
+        $validator = Validator::make($request->all(), [ 
+            'uuid' => 'required|uuid|exists:nodes',
+            'uuid_to' => 'required|uuid|exists:entities',
+        ]);
+        
+        if ($validator->fails()) { 
+            return response()->json(['errors'=>$validator->errors()], 400);            
+        }
+
+        $entity = Entity::where('uuid', $request->uuid_to)->first();
+
+        $node = Node::where('uuid', $request->uuid)->first();
+
+        $items = NodeItem::where('node_id', $node->id)->get();
+
+        try {
+            DB::transaction(function () use ($request, $entity, $node, $items) {
+                $nodeObj = Node::create([
+                    'entity_id' => $entity->id,
+                    'uuid' => Str::uuid(),
+                    'name' => $node->name
+                ]);
+                foreach ($items as $item) {
+                    $nodeItm = NodeItem::create([
+                        'node_id' => $nodeObj->id,
+                        'item_id' => $item->id,
+                        'uuid' => Str::uuid(),
+                        'count' => $item->count,
+                        'amount' => $item->amount,
+                        'description' => $item->description,
+                    ]);
+                }
+            });
+        } catch (\Throwable $th) {
+            return $th;
+        }
+
+        return $this->sendResponse([], 'Node copied');
+    }
 }
