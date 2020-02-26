@@ -85,4 +85,13 @@ class EntityApiController extends ApiBaseController
 
         // return $this->sendResponse([$obj], 'Entity deleted');
     }
+
+    public function show($uuid)
+    {
+        $entity = Entity::where('uuid', $uuid)->first();
+
+        $nodes = Node::where('entity_id', $entity->id)->get()->toArray();
+
+        return $this->sendResponse($nodes, 'Nodes deleted');
+    }
 }

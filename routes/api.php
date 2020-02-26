@@ -28,6 +28,8 @@ Route::group(['middleware' => 'auth:api'], function(){
 
     Route::resource('node', 'Api\NodeApiController');
 
+    Route::post('addItemToNode', 'Api\NodeApiController@addItemToNode');
+
     Route::get('test', 'Api\AuthApiController@test');
     
 });

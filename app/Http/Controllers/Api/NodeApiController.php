@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Models\Node;
+use App\Models\NodeItem;
 use App\Models\Entity;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -69,19 +70,32 @@ class NodeApiController extends ApiBaseController
     //     return $this->sendResponse([$obj], 'Entity deleted');
     // }
 
-    // public function addItemToNode(Request $request)
-    // {
-    //     $validator = Validator::make($uuid, [ 
-    //         'uuid_item' => 'required|uuid|exists:items,uuid',
-    //         'uuid_node' => 'required|uuid|exists:nodes,uuid',
-    //     ]);
+    public function addItemToNode(Request $request)
+    {
+        $validator = Validator::make($uuid, [ 
+            'uuid_item' => 'required|uuid|exists:items,uuid',
+            'uuid_node' => 'required|uuid|exists:nodes,uuid',
+            'count' => 'required',
+            'amount' => 'required',
+            'description' => 'required',
+        ]);
         
-    //     if ($validator->fails()) { 
-    //         return response()->json(['errors'=>$validator->errors()], 401);            
-    //     }
+        if ($validator->fails()) { 
+            return response()->json(['errors'=>$validator->errors()], 401);            
+        }
 
-    //     $node = Node::where('')
+        $node = Node::where('uuid', $request->uuid_node)->first();
+        $item = Item::where('uuid', $request->uuid_item)->first();
 
-    //     return $this->sendResponse(Item::select('id', 'uuid', 'name', 'photo')->where('uuid', $uuid)->first(), 'Item');
-    // }
+        NodeItem::create([
+            'node_id' => $node->id,
+            'item' => $item->id,
+            'uuid' => Str::uuid(),
+            'count' => $request->count,
+            'amount' => $request->amount,
+            'description' => $request->description,
+        ]);
+
+        return $this->sendResponse([], 'Item added');
+    }
 }
