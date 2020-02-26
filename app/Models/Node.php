@@ -24,6 +24,6 @@ class Node extends Model
         // ->get()
         // ->toArray();
 
-        $this->hasMany(NodeItem::class, 'id')->get();
+        return $this->hasMany(NodeItem::class, 'node_id')->get();
     }
 }
