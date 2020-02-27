@@ -70,17 +70,9 @@ class NodeApiController extends ApiBaseController
         return $this->sendResponse([], 'Node created');
     }
 
-    public function destroy(Request $request)
+    public function destroy($uuid)
     {
-        $validator = Validator::make($request->all(), [ 
-            'uuid' => 'required|uuid|exists:nodes',
-        ]);
-        
-        if ($validator->fails()) { 
-            return response()->json(['errors'=>$validator->errors()], 401);            
-        }
-
-        $node = Node::where('uuid', $request->uuid)->first();
+        $node = Node::where('uuid', $uuid)->first();
 
         try {
             DB::transaction(function () use ($node) {
