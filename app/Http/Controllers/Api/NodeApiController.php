@@ -31,45 +31,68 @@ class NodeApiController extends ApiBaseController
             'Entity + node list');
     }
 
-    // public function store(Request $request)
-    // {
-    //     $validator = Validator::make($request->all(), [ 
-    //         'name' => 'required|string|min:2|max:191',
-    //     ]);
+    public function store(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'uuid' => 'required|uuid|exists:entities',
+            'name' => 'required|string|min:2|max:191',
+            'data' => 'array'
+        ]);
         
-    //     if ($validator->fails()) { 
-    //         return response()->json(['errors'=>$validator->errors()], 401);            
-    //     }
+        if ($validator->fails()) { 
+            return response()->json(['errors'=>$validator->errors()], 401);            
+        }
 
-    //     try {
-    //         DB::transaction(function () use ($request) {
-    //             $this->obj = Entity::create([
-    //                 'uuid' => Str::uuid(),
-    //                 'client_id' => auth('api')->user()->id,
-    //                 'name' => $request->name
-    //             ]);
-    //         });
-    //     } catch (\Throwable $th) {
-    //         return $th;
-    //     }
+        $entity = Entity::where('uuid', $request->uuid)->first();
 
-    //     return $this->sendResponse([$this->obj], 'Entity created');
-    // }
+        try {
+            DB::transaction(function () use ($request, $entity) {
+                $nodeObj = Node::create([
+                    'entity_id' => $entity->id,
+                    'uuid' => Str::uuid(),
+                    'name' => $request->name
+                ]);
+                foreach ($request->data as $item) {
+                    $nodeItm = NodeItem::create([
+                        'node_id' => $nodeObj->id,
+                        'item_id' => $item['id'],
+                        'uuid' => Str::uuid(),
+                        'count' => $item['count'],
+                        'amount' => $item['amount'],
+                        'description' => $item['description'],
+                    ]);
+                }
+            });
+        } catch (\Throwable $th) {
+            return $th;
+        }
 
-    // public function destroy(Request $request)
-    // {
-    //     $validator = Validator::make($request->all(), [ 
-    //         'uuid' => 'required|uuid|exists:entities',
-    //     ]);
+        return $this->sendResponse([], 'Node created');
+    }
+
+    public function destroy(Request $request)
+    {
+        $validator = Validator::make($request->all(), [ 
+            'uuid' => 'required|uuid|exists:nodes',
+        ]);
         
-    //     if ($validator->fails()) { 
-    //         return response()->json(['errors'=>$validator->errors()], 401);            
-    //     }
+        if ($validator->fails()) { 
+            return response()->json(['errors'=>$validator->errors()], 401);            
+        }
 
-    //     $obj = Entity::where('uuid', $request->uuid)->delete();
+        $node = Node::where('uuid', $request->uuid)->first();
 
-    //     return $this->sendResponse([$obj], 'Entity deleted');
-    // }
+        try {
+            DB::transaction(function () use ($node) {
+                $items = NodeItem::where('node_id', $node->id)->delete();
+                $node->delete();
+            });
+        } catch (\Throwable $th) {
+            return $th;
+        }
+
+        return $this->sendResponse([$obj], 'Node deleted');
+    }
 
     public function addItemToNode(Request $request)
     {
