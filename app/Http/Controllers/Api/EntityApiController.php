@@ -73,7 +73,7 @@ class EntityApiController extends ApiBaseController
 
     public function destroy($uuid)
     {
-        $obj = Entity::where('uuid', $request->uuid)->first();
+        $obj = Entity::where('uuid', $uuid)->first();
         $node = Node::where('entity_id', $obj->id)->first();
 
         try {
