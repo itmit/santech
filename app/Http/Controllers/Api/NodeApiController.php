@@ -83,7 +83,7 @@ class NodeApiController extends ApiBaseController
             return $th;
         }
 
-        return $this->sendResponse([$obj], 'Node deleted');
+        return $this->sendResponse([], 'Node deleted');
     }
 
     public function addItemToNode(Request $request)
