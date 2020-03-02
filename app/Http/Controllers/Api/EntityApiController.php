@@ -57,8 +57,8 @@ class EntityApiController extends ApiBaseController
                             'node_id' => $nodeObj->id,
                             'item_id' => $item['id'],
                             'uuid' => Str::uuid(),
-                            'count' => $item['Quantity'],
-                            'amount' => $item['Price'],
+                            'count' => $item['count'],
+                            'amount' => $item['amount'],
                             'description' => $item['Description'],
                         ]);
                     }
