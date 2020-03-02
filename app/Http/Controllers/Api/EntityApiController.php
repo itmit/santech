@@ -57,9 +57,9 @@ class EntityApiController extends ApiBaseController
                             'node_id' => $nodeObj->id,
                             'item_id' => $item['id'],
                             'uuid' => Str::uuid(),
-                            'count' => $item['count'],
-                            'amount' => $item['amount'],
-                            'description' => $item['description'],
+                            'count' => $item['Quantity'],
+                            'amount' => $item['Price'],
+                            'description' => $item['Description'],
                         ]);
                     }
                 }
@@ -101,13 +101,13 @@ class EntityApiController extends ApiBaseController
             $items = [];
             foreach ($node->getItems() as $item) {
                 $items[] = [
-                    'item' => $item->name,
+                    'name' => $item->name,
                     'count' => $item->count,
                     'amount' => $item->amount,
                 ];
             }
             $result[] = [
-                'node' => $node->name,
+                'name' => $node->name,
                 'items' => $items
             ];
         };
