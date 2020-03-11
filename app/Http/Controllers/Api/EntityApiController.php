@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
+use PDF;
 
 class EntityApiController extends ApiBaseController
 {
@@ -115,8 +116,15 @@ class EntityApiController extends ApiBaseController
         return $this->sendResponse($result, "Object's nodes");
     }
 
-    public function getEstimate()
+    public function getEstimate($uuid)
     {
-        
+        $estimate = Entity::where('uuid', $uuid)
+        ->join('nodes', 'entities.id', '=', 'nodes.entity_id')
+        ->join('node_items', 'nodes.id', '=', 'node_items.node_id')
+        ->join('items', 'nodes.id', '=', 'node_items.node_id')
+        ->select(['entities.name AS entity_name', 'items.name AS item_name'])
+        ->get()
+        ->toArray();
+        return $this->sendResponse($estimate, "Estimate");
     }
 }
