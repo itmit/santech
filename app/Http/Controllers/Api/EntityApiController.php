@@ -114,4 +114,9 @@ class EntityApiController extends ApiBaseController
 
         return $this->sendResponse($result, "Object's nodes");
     }
+
+    public function getEstimate()
+    {
+        
+    }
 }
