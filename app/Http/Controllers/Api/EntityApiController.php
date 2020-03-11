@@ -118,7 +118,7 @@ class EntityApiController extends ApiBaseController
 
     public function getEstimate($uuid)
     {
-        $estimate = Entity::where('uuid', $uuid)
+        $estimate = Entity::where('entities.uuid', $uuid)
         ->join('nodes', 'entities.id', '=', 'nodes.entity_id')
         ->join('node_items', 'nodes.id', '=', 'node_items.node_id')
         ->join('items', 'nodes.id', '=', 'node_items.node_id')
