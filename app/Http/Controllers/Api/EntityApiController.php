@@ -133,6 +133,7 @@ class EntityApiController extends ApiBaseController
                     'name' => $item->name,
                     'count' => $item->count,
                     'amount' => $item->amount,
+                    'price' => $item->count * $item->amount,
                 ];
             }
             $estimate[] = [
