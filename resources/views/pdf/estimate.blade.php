@@ -17,10 +17,10 @@
                 <tbody>
                   @foreach($estimate as $item)
                     <tr>
+                      {{-- <td>{{ $item }}</td>
                       <td>{{ $item }}</td>
                       <td>{{ $item }}</td>
-                      <td>{{ $item }}</td>
-                      <td>{{ $item }}</td>
+                      <td>{{ $item }}</td> --}}
                     </tr>
                   @endforeach
                   <tr>
