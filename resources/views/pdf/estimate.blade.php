@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-8">
+        <div class="col-md-12">
             {{-- <h1>{{ $entity->name }}</h1> --}}
             <h1>Наименование объекта</h1>
             <table>
@@ -26,13 +26,13 @@
                   @endforeach --}}
                   <tr>
                     <td>Наименование</td>
-                    <td>Количество}</td>
+                    <td>Количество</td>
                     <td>Цена</td>
                     <td>Итого</td>
                   </tr>
                   <tr>
                     <td>Наименование</td>
-                    <td>Количество}</td>
+                    <td>Количество</td>
                     <td>Цена</td>
                     <td>Итого</td>
                   </tr>
@@ -41,7 +41,7 @@
                     <td></td>
                     <td></td>
                     {{-- <td>{{ $total }}</td> --}}
-                    <td>100500р/td>
+                    <td>100500р</td>
                   </tr>
                 </tbody>     
             </table>         
