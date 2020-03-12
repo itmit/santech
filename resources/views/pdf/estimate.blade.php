@@ -8,26 +8,26 @@
             <table>
                 <thead>
                   <tr>
-                    <th>Name</th>
+                    <th>Наименование</th>
                     <th>Кол-во</th>
                     <th>Цена</th>
                     <th>Итого</th>
                   </tr>
                 </thead>
                 <tbody>
-                  {{-- @foreach($estimate as $item)
+                  @foreach($estimate['items'] as $item)
                     <tr>
-                      <td>{{ $customer->id }}</td>
-                      <td>{{ $customer->name }}</td>
-                      <td>{{ $customer->email }}</td>
-                      <td>{{ $customer->phone }}</td>
+                      <td>{{ $item->name }}</td>
+                      <td>{{ $item->count }}</td>
+                      <td>{{ $item->amount }}</td>
+                      <td>{{ $item->price }}</td>
                     </tr>
-                  @endforeach --}}
+                  @endforeach
                   <tr>
                     <td><b>Итого</b></td>
                     <td></td>
                     <td></td>
-                    {{-- <td>{{ $total }}</td> --}}
+                    <td>{{ $total }}</td>
                   </tr>
                 </tbody>     
             </table>         

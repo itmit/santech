@@ -118,7 +118,6 @@ class EntityApiController extends ApiBaseController
 
     public function getEstimate($uuid)
     {
-        // return storage_path().'/app/public/estimate/'.$uuid.'.pdf';
         $entity = Entity::where('uuid', $uuid)
         ->first();
 
@@ -126,6 +125,7 @@ class EntityApiController extends ApiBaseController
         ->get();
 
         $estimate = [];
+        $total = 0;
 
         foreach ($nodes as $node) {
             $items = [];
@@ -136,13 +136,14 @@ class EntityApiController extends ApiBaseController
                     'amount' => $item->amount,
                     'price' => $item->count * $item->amount,
                 ];
+                $total = $total + $item->count * $item->amount;
             }
             $estimate[] = [
                 'items' => $items
             ];
         };
 
-        $pdf = PDF::loadView('pdf.estimate', ['estimate' => $estimate, 'entity' => $entity]);
+        $pdf = PDF::loadView('pdf.estimate', ['estimate' => $estimate, 'entity' => $entity, 'total' => $total]);
     
         $pdf->save(storage_path().'/app/public/'.$uuid.'.pdf');
 
