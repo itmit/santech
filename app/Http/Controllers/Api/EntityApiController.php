@@ -145,6 +145,8 @@ class EntityApiController extends ApiBaseController
         $pdf = PDF::loadView('pdf.estimate', $estimate);
         
         $pdf->save(storage_path().'test.pdf');
+
+        return storage_path();
         // $pdf->save(storage_path().$uuid.'.pdf');
 
         // return $pdf->download($uuid.'.pdf');
