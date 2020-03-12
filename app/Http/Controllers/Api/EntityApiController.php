@@ -150,4 +150,32 @@ class EntityApiController extends ApiBaseController
 
         return $this->sendResponse([$link], "PDF");
     }
+
+    public function getEstimate($uuid)
+    {
+        $entity = Entity::where('uuid', $uuid)
+        ->first();
+
+        $nodes = Node::where('entity_id', $entity->id)
+        ->get();
+
+        $estimate = [];
+        $total = 0;
+
+        foreach ($nodes as $node) {
+            $items = [];
+            foreach ($node->getItems() as $item) {
+                $items[] = [
+                    'name' => $item->name,
+                    'count' => $item->count,
+                    'amount' => $item->amount,
+                    'price' => $item->count * $item->amount,
+                ];
+                $total = $total + $item->count * $item->amount;
+            }
+            $estimate = $items;
+        };
+
+        return $this->sendResponse($estimate, "PDF");
+    }
 }
