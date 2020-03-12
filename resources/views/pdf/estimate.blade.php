@@ -17,10 +17,10 @@
                 <tbody>
                   @foreach($estimate as $item)
                     <tr>
-                      <td>{{ $item->name }}</td>
-                      <td>{{ $item->count }}</td>
-                      <td>{{ $item->amount }}</td>
-                      <td>{{ $item->price }}</td>
+                      <td>{{ $item['name'] }}</td>
+                      <td>{{ $item['count'] }}</td>
+                      <td>{{ $item['amount'] }}</td>
+                      <td>{{ $item['price'] }}</td>
                     </tr>
                   @endforeach
                   <tr>
