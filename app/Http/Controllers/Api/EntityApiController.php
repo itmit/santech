@@ -118,7 +118,7 @@ class EntityApiController extends ApiBaseController
 
     public function getEstimate($uuid)
     {
-        return storage_path().'/app/public/estimate/'.$uuid.'.pdf';
+        // return storage_path().'/app/public/estimate/'.$uuid.'.pdf';
         $entity = Entity::where('uuid', $uuid)
         ->first();
 
@@ -144,8 +144,8 @@ class EntityApiController extends ApiBaseController
 
         $pdf = PDF::loadView('pdf.estimate', ['estimate' => $estimate, 'entity' => $entity]);
     
-        $pdf->save(storage_path().'/app/public/estimate/'.$uuid.'.pdf');
+        $pdf->save(storage_path().'/'.$uuid.'.pdf');
 
-        // return $pdf->download($uuid.'.pdf');
+        return $pdf->download($uuid.'.pdf');
     }
 }
