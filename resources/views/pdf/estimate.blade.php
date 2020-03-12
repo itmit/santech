@@ -17,7 +17,7 @@
                 <tbody>
                   @foreach($estimate as $item)
                     <tr>
-                      <td>{{ $item['name'] }}</td>
+                      <td>{{ $item->name }}</td>
                       <td>{{ $item }}</td>
                       <td>{{ $item }}</td>
                       <td>{{ $item }}</td>
