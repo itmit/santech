@@ -6,7 +6,7 @@
         <div class="col-md-12">
             {{-- <h1>{{ $entity->name }}</h1> --}}
             <h1>Наименование объекта</h1>
-            <table>
+            <table style="width: 100%">
                 <thead>
                   <tr>
                     <th>Name</th>
