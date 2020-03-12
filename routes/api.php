@@ -26,6 +26,7 @@ Route::group(['middleware' => 'auth:api'], function(){
 
     Route::resource('entity', 'Api\EntityApiController');
     Route::get('entity/getEstimate/{uuid}', 'Api\EntityApiController@getEstimate');
+    Route::get('entity/getEstimatePDF/{uuid}', 'Api\EntityApiController@getEstimatePDF');
 
     Route::resource('node', 'Api\NodeApiController');
     Route::post('node/copy', 'Api\NodeApiController@copyNode');
