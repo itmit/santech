@@ -1,10 +1,10 @@
-@extends('layouts.app')
+@extends('layouts.pdfApp')
 
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            {{-- <h1>{{ $estimate['entity'] }}</h1> --}}
+            <h1>{{ $estimate['entity'] }}</h1>
             <table>
                 <thead>
                   <tr>
