@@ -118,6 +118,7 @@ class EntityApiController extends ApiBaseController
 
     public function getEstimate($uuid)
     {
+        return storage_path().'/app/public/estimate/'.$uuid.'.pdf';
         $entity = Entity::where('uuid', $uuid)
         ->first();
 
