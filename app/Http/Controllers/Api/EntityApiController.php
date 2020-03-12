@@ -122,7 +122,7 @@ class EntityApiController extends ApiBaseController
         ->join('nodes', 'entities.id', '=', 'nodes.entity_id')
         // ->join('node_items', 'nodes.id', '=', 'node_items.node_id')
         // ->join('items', 'nodes.id', '=', 'node_items.node_id')
-        ->select(['entities.name AS entity_name', 'nodes.name AS node_name'])
+        ->select(['entities.name AS entity_name'], ['nodes.name AS node_name'])
         ->get()
         ->toArray();
         return $this->sendResponse($estimate, "Estimate");
