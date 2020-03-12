@@ -141,6 +141,8 @@ class EntityApiController extends ApiBaseController
             $estimate[] = $items;
         };
 
+        return $this->sendResponse($estimate, "Object's nodes");
+
         $pdf = PDF::loadView('pdf.estimate', ['estimate' => $estimate, 'entity' => $entity, 'total' => $total]);
     
         $pdf->save(storage_path().'/app/public/estimate/'.$uuid.'.pdf');
