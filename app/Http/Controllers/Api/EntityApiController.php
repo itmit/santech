@@ -147,6 +147,6 @@ class EntityApiController extends ApiBaseController
     
         $pdf->save(storage_path().'/app/public/estimate/'.$uuid.'.pdf');
 
-        return $pdf->download($uuid.'.pdf');
+        return $pdf->stream($uuid.'.pdf');
     }
 }
