@@ -120,9 +120,9 @@ class EntityApiController extends ApiBaseController
     {
         $estimate = Entity::where('entities.uuid', $uuid)
         ->join('nodes', 'entities.id', '=', 'nodes.entity_id')
-        // ->join('node_items', 'nodes.id', '=', 'node_items.node_id')
-        // ->join('items', 'nodes.id', '=', 'node_items.node_id')
-        ->select('entities.name', 'nodes.name')
+        ->join('node_items', 'nodes.id', '=', 'node_items.node_id')
+        ->join('items', 'nodes.id', '=', 'node_items.node_id')
+        ->select(['entities.name AS entity_name', 'items.name AS item_name'])
         ->get()
         ->toArray();
         return $this->sendResponse($estimate, "Estimate");
