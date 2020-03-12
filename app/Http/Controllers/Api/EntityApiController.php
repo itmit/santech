@@ -137,10 +137,15 @@ class EntityApiController extends ApiBaseController
                 ];
             }
             $estimate[] = [
+                'entity' => $entity->name,
                 'items' => $items
             ];
         };
 
-        return $this->sendResponse($estimate, "Estimate");
+        $pdf = PDF::loadView('pdf.estimate', $estimate);
+        
+        $pdf->save(storage_path().''.$uuid.'.pdf');
+
+        return $pdf->download(''.$uuid.'.pdf');
     }
 }
