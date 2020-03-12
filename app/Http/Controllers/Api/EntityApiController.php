@@ -138,7 +138,7 @@ class EntityApiController extends ApiBaseController
                 ];
                 $total = $total + $item->count * $item->amount;
             }
-            $estimate[] = $items;
+            $estimate = $items;
         };
 
         return $this->sendResponse($estimate, "Object's nodes");
