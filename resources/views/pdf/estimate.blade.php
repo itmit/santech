@@ -8,23 +8,23 @@
             <table>
                 <thead>
                   <tr>
-                    <th>Наименование</th>
-                    <th>Кол-во</th>
-                    <th>Цена</th>
-                    <th>Итого</th>
+                    <th>Name</th>
+                    <th>Count</th>
+                    <th>Price</th>
+                    <th>Total</th>
                   </tr>
                 </thead>
                 <tbody>
                   @foreach($estimate as $item)
                     <tr>
-                      {{-- <td>{{ $item }}</td>
+                      <td>{{ $item['name'] }}</td>
                       <td>{{ $item }}</td>
                       <td>{{ $item }}</td>
-                      <td>{{ $item }}</td> --}}
+                      <td>{{ $item }}</td>
                     </tr>
                   @endforeach
                   <tr>
-                    <td><b>Итого</b></td>
+                    <td><b>Total</b></td>
                     <td></td>
                     <td></td>
                     <td>{{ $total }}</td>
