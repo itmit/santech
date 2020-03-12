@@ -141,7 +141,7 @@ class EntityApiController extends ApiBaseController
             $estimate = $items;
         };
 
-        return $this->sendResponse($estimate, "Object's nodes");
+        // return $this->sendResponse($estimate, "Object's nodes");
 
         $pdf = PDF::loadView('pdf.estimate', ['estimate' => $estimate, 'entity' => $entity, 'total' => $total]);
     
