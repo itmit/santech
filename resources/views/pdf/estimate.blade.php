@@ -15,7 +15,7 @@
                   </tr>
                 </thead>
                 <tbody>
-                  @foreach($estimate['items'] as $item)
+                  @foreach($estimate as $item)
                     <tr>
                       <td>{{ $item->name }}</td>
                       <td>{{ $item->count }}</td>
