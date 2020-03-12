@@ -137,12 +137,11 @@ class EntityApiController extends ApiBaseController
                 ];
             }
             $estimate[] = [
-                'entity' => $entity->name,
                 'items' => $items
             ];
         };
 
-        $pdf = PDF::loadView('pdf.estimate', ['estimate' => $estimate]);
+        $pdf = PDF::loadView('pdf.estimate', ['estimate' => $estimate, 'entity' => $entity]);
     
         $pdf->save(storage_path().'/storage/estimate'.$uuid.'.pdf');
 
