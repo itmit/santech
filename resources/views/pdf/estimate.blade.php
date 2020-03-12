@@ -8,7 +8,7 @@
             <table>
                 <thead>
                   <tr>
-                    <th>Наименование</th>
+                    <th>Name</th>
                     <th>Кол-во</th>
                     <th>Цена</th>
                     <th>Итого</th>
