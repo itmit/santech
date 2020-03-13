@@ -9,10 +9,10 @@
             <table style="width: 100%; text-align: center">
                 <thead>
                   <tr>
-                    <th>Name</th>
-                    <th>Count</th>
-                    <th>Price</th>
-                    <th>Total</th>
+                    <th>Наименование</th>
+                    <th>Кол-во</th>
+                    <th>Цена</th>
+                    <th>Итого</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -24,24 +24,11 @@
                       <td>{{ $item['price'] }}</td>
                     </tr>
                   @endforeach
-                  {{-- <tr>
-                    <td>Наименование</td>
-                    <td>Количество</td>
-                    <td>Цена</td>
-                    <td>Итого</td>
-                  </tr>
                   <tr>
-                    <td>Наименование</td>
-                    <td>Количество</td>
-                    <td>Цена</td>
-                    <td>Итого</td>
-                  </tr> --}}
-                  <tr>
-                    <td><b>Total</b></td>
+                    <td><b>Итого</b></td>
                     <td></td>
                     <td></td>
                     <td>{{ $total }}</td>
-                    {{-- <td>100500р</td> --}}
                   </tr>
                 </tbody>     
             </table>         
