@@ -4,7 +4,7 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-12">
-            <p>{{ $entity->name }}</p>
+            <p><b>{{ $entity->name }}</b></p>
             {{-- <h1>Наименование объекта</h1> --}}
             <table style="width: 100%; text-align: center">
                 <thead>

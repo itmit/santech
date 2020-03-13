@@ -108,6 +108,7 @@ class EntityApiController extends ApiBaseController
                 ];
             }
             $result[] = [
+                'uuid' => $node->uuid,
                 'name' => $node->name,
                 'items' => $items
             ];
