@@ -142,7 +142,7 @@ class NodeApiController extends ApiBaseController
                 foreach ($items as $item) {
                     $nodeItm = NodeItem::create([
                         'node_id' => $nodeObj->id,
-                        'item_id' => $item->id,
+                        'item_id' => $item->getItem(),
                         'uuid' => Str::uuid(),
                         'count' => $item->count,
                         'amount' => $item->amount,

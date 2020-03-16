@@ -15,4 +15,9 @@ class NodeItem extends Model
      * @var array
      */
     protected $guarded = ['id'];
+
+    public function getItem()
+    {
+        return $this->hasOne(Item::class, 'item_id')->first('id');
+    }
 }
