@@ -18,6 +18,6 @@ class NodeItem extends Model
 
     public function getItem()
     {
-        return $this->belongsTo(Item::class, 'item_id')->first('id');
+        return $this->belongsTo(Item::class, 'item_id')->first('id')->id;
     }
 }
