@@ -43,7 +43,7 @@ class CatalogController extends Controller
             }
         }
 
-        $path = storage_path() . '/app/susliks_upload';
+        $path = storage_path() . '/app/catalog_upload';
         if (file_exists($path)) {
             foreach (glob($path.'/*') as $file) {
                 if(is_dir($file))
@@ -64,7 +64,7 @@ class CatalogController extends Controller
         $zip = new ZipArchive;
         $res = $zip->open($path);
         if ($res === TRUE) {
-            $zip->extractTo(storage_path() . '/app/susliks_upload');
+            $zip->extractTo(storage_path() . '/app/catalog_upload');
             $zip->close();
             // $import = self::storeSusliksFromZip();
         }
