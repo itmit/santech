@@ -6,6 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Models\Entity;
 use App\Models\Node;
 use App\Models\NodeItem;
+use App\Models\Item;
+use App\Models\Category;
+use App\Models\Catalog;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -93,12 +96,19 @@ class CatalogController extends Controller
                 $result = [];
                 $suslik = [];
 
+                $row1 = 1;
+                $col1 = 'A';
+                $row2 = 1;
+                $col2 = 'B';
+                Catalog::create([
+                    'uuid' => Str::uuid(),
+                    'name' => $cells->get($col1.$row1)->getValue(),
+                    'photo' => '/storage/catalog/'.$cells->get($col2.$row2)->getValue()
+                ]);
+                return
+
                 for ($row = 1; $row <= $cells->getHighestRow(); $row++){
                     for ($col = 'A'; $col <= 'D'; $col++) {
-                        // if($suslik[$col] = $cells->get($col.$row) == NULL)
-                        // {
-                        //     continue;
-                        // }
                         return $suslik[$col] = $cells->get($col.$row)->getValue();
                     }
                     $result[$row] = $suslik;
