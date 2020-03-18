@@ -121,7 +121,7 @@ class EntityApiController extends ApiBaseController
 
     public function edit($uuid)
     {
-        $entity = Entity::where('uuid', $uuid)->first();
+        $entity = Entity::where('uuid', $uuid)->first(['uuid', 'name']);
 
         $nodes = Node::where('entity_id', $entity->id)->get();
 
