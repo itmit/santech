@@ -176,9 +176,10 @@ class EntityApiController extends ApiBaseController
                     foreach ($request->data as $node) {
                         if(Node::where('uuid', $node['uuid'])->exists())
                         {
-                            $nodeObj = Node::where('uuid', $node['uuid'])->update([
+                            Node::where('uuid', $node['uuid'])->update([
                                 'name' => $node['name']
                             ]);
+                            $nodeObj = Node::where('uuid', $node['uuid'])->first();
                         }
                         else
                         {
