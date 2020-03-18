@@ -188,30 +188,33 @@ class EntityApiController extends ApiBaseController
                                 'name' => $node['name']
                             ]);
                         }
-                        foreach ($node['items'] as $item) {
-                            if(NodeItem::where('uuid', $item['uuid'])->exists())
-                            {
-                                $nodeItm = NodeItem::where('uuid', $item['uuid'])->update([
-                                    'node_id' => $nodeObj->id,
-                                    'item_id' => $item['id'],
-
-                                    'count' => $item['count'],
-                                    'amount' => $item['amount'],
-                                    'description' => $item['Description'],
-                                ]);
+                        if(!empty($node['items']))
+                        {
+                            foreach ($node['items'] as $item) {
+                                if(NodeItem::where('uuid', $item['uuid'])->exists())
+                                {
+                                    $nodeItm = NodeItem::where('uuid', $item['uuid'])->update([
+                                        'node_id' => $nodeObj->id,
+                                        'item_id' => $item['id'],
+    
+                                        'count' => $item['count'],
+                                        'amount' => $item['amount'],
+                                        'description' => $item['Description'],
+                                    ]);
+                                }
+                                else
+                                {
+                                    $nodeItm = NodeItem::create([
+                                        'node_id' => $nodeObj->id,
+                                        'item_id' => $item['id'],
+                                        'uuid' => Str::uuid(),
+                                        'count' => $item['count'],
+                                        'amount' => $item['amount'],
+                                        'description' => $item['Description'],
+                                    ]);
+                                }
                             }
-                            else
-                            {
-                                $nodeItm = NodeItem::create([
-                                    'node_id' => $nodeObj->id,
-                                    'item_id' => $item['id'],
-                                    'uuid' => Str::uuid(),
-                                    'count' => $item['count'],
-                                    'amount' => $item['amount'],
-                                    'description' => $item['Description'],
-                                ]);
-                            }
-                        }
+                        } 
                     }
                 }
             });
