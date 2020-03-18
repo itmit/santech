@@ -108,7 +108,8 @@ class CatalogController extends Controller
 
                 for ($row = 2; $row <= $cells->getHighestRow(); $row++){
                     for ($col = 'A'; $col <= 'D'; $col++) {
-                        $position[$col] = $cells->get($col.$row)->getValue();
+                        if($cells->get($col.$row) == null) $position[$col] = null
+                        else $position[$col] = $cells->get($col.$row)->getValue();
                     }
                     $result[$row] = $position;
                     $position = [];
