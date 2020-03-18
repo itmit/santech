@@ -66,9 +66,115 @@ class CatalogController extends Controller
         if ($res === TRUE) {
             $zip->extractTo(storage_path() . '/app/catalog_upload');
             $zip->close();
-            // $import = self::storeSusliksFromZip();
+            $import = self::storeCatalogFromZip();
         }
         else return 'false';
         return 'true';
+    }
+
+    public function storeCatalogFromZip()
+    {
+        $files = scandir(storage_path() . '/app/catalog_upload');
+        foreach($files as $file)
+        {
+            $fileType = new SplFileInfo($file);
+
+            $reader = new Xlsx();
+            $reader->setReadDataOnly(true);
+           
+            if($fileType->getExtension() == "xlsx")
+            {
+                $url = storage_path() . '/app/catalog_upload/' . $file;
+                $spreadsheet = $reader->load($url);
+
+                $cells = $spreadsheet->getActiveSheet()->getCellCollection();
+
+                return $cells->getHighestRow();
+                        
+                $result = [];
+                $suslik = [];
+
+                for ($row = 2; $row <= $cells->getHighestRow(); $row++){
+                    for ($col = 'A'; $col <= 'D'; $col++) {
+                        if($suslik[$col] = $cells->get($col.$row) == NULL)
+                        {
+                            continue;
+                        }
+                        $suslik[$col] = $cells->get($col.$row)->getValue();
+                    }
+                    $result[$row] = $suslik;
+                    $suslik = [];
+                }   
+                
+                foreach($result as $item)
+                {
+                    $categoryID = SusliksCategory::where('name', '=', $item['E'])->first('id');
+                    if($categoryID == NULL)
+                    {
+                        continue;
+                    }
+
+                    $isSuslikExists = Suslik::where('number', '=', $item['A'])->first();
+                    if($isSuslikExists != NULL)
+                    {
+                        continue;
+                    }
+
+                    $newSuslik = Suslik::create([
+                        'uuid' => (string) Str::uuid(),
+                        'name' => $item['B'],
+                        'number' => $item['A'],
+                        'place_of_work' => $item['C'],
+                        'position' => $item['D'],
+                        'category' => $categoryID->id,
+                        'link' => $item['G'],
+                    ]);
+
+                    foreach($files as $suslikImage)
+                    { 
+                        $imageName = new SplFileInfo($suslikImage);
+                        if($imageName->getFilename() == $item['F'])
+                        {
+                            $imageExtension = $imageName->getExtension();
+                            $urlImage = storage_path() . '/app/susliks_upload/' . $imageName;
+
+                            if (file_exists($urlImage))
+                            {
+                                $photo = $newSuslik->uuid;
+                                rename($urlImage, storage_path() . '/app/public/susliks/' . $photo . '.' . $imageExtension);
+                                
+                                Suslik::where('id', '=', $newSuslik->id)->update([
+                                    'photo' => $photo . '.' . $imageExtension
+                                ]);  
+                            }                          
+                        }
+                    }
+                }
+            }      
+        }
+
+        $path = storage_path() . '/app/temp';
+        if (file_exists($path)) {
+            foreach (glob($path.'/*') as $file) {
+                unlink($file);
+            }
+        }
+
+        $path = storage_path() . '/app/susliks_upload';
+        if (file_exists($path)) {
+            foreach (glob($path.'/*') as $file) {
+                if(is_dir($file))
+                {
+                    foreach(scandir($file) as $p) if (($p!='.') && ($p!='..'))
+                    unlink($file.DIRECTORY_SEPARATOR.$p);
+                    // return rmdir($file);
+                }
+                else
+                {
+                    unlink($file);
+                }
+            }
+        }
+        return true;
     }
 }
