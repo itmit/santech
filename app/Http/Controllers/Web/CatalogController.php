@@ -89,19 +89,17 @@ class CatalogController extends Controller
                 $spreadsheet = $reader->load($url);
 
                 $cells = $spreadsheet->getActiveSheet()->getCellCollection();
-
-                return $cells->get('A'.1)->getValue();
                         
                 $result = [];
                 $suslik = [];
 
                 for ($row = 2; $row <= $cells->getHighestRow(); $row++){
                     for ($col = 'A'; $col <= 'D'; $col++) {
-                        if($suslik[$col] = $cells->get($col.$row) == NULL)
-                        {
-                            continue;
-                        }
-                        $suslik[$col] = $cells->get($col.$row)->getValue();
+                        // if($suslik[$col] = $cells->get($col.$row) == NULL)
+                        // {
+                        //     continue;
+                        // }
+                        return $suslik[$col] = $cells->get($col.$row)->getValue();
                     }
                     $result[$row] = $suslik;
                     $suslik = [];
