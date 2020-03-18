@@ -30,9 +30,12 @@ Route::group(['middleware' => 'auth:api'], function(){
 
     Route::resource('node', 'Api\NodeApiController');
     Route::post('node/copy', 'Api\NodeApiController@copyNode');
+    Route::delete('node/destroyItemFromNode/{uuid}', 'Api\NodeApiController@destroyItemFromNode');
 
     Route::post('addItemToNode', 'Api\NodeApiController@addItemToNode');
 
     Route::get('test', 'Api\AuthApiController@test');
     
 });
+
+Route::delete('node/destroyItemFromNode/{uuid}', 'Api\NodeApiController@destroyItemFromNode');

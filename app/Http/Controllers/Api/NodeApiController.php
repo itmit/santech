@@ -86,6 +86,21 @@ class NodeApiController extends ApiBaseController
         return $this->sendResponse([], 'Node deleted');
     }
 
+    public function destroyItemFromNode($uuid)
+    {
+        $item = NodeItem::where('uuid', $uuid)->first();
+
+        try {
+            DB::transaction(function () use ($uuid) {
+                $item = NodeItem::where('uuid', $uuid)->delete();
+            });
+        } catch (\Throwable $th) {
+            return $th;
+        }
+
+        return $this->sendResponse([], 'Item deleted from node');
+    }
+
     public function addItemToNode(Request $request)
     {
         $validator = Validator::make($request->all(), [ 
