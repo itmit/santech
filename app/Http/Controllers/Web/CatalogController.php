@@ -94,7 +94,7 @@ class CatalogController extends Controller
                 $cells = $spreadsheet->getActiveSheet()->getCellCollection();
                         
                 $result = [];
-                $suslik = [];
+                $position = [];
 
                 $row1 = 1;
                 $col1 = 'A';
@@ -105,15 +105,16 @@ class CatalogController extends Controller
                     'name' => $cells->get($col1.$row1)->getValue(),
                     'photo' => '/storage/catalog/'.$cells->get($col2.$row2)->getValue()
                 ]);
-                return;
 
-                for ($row = 1; $row <= $cells->getHighestRow(); $row++){
+                for ($row = 2; $row <= $cells->getHighestRow(); $row++){
                     for ($col = 'A'; $col <= 'D'; $col++) {
-                        return $suslik[$col] = $cells->get($col.$row)->getValue();
+                        return $position[$col] = $cells->get($col.$row)->getValue();
                     }
-                    $result[$row] = $suslik;
-                    $suslik = [];
+                    $result[$row] = $position;
+                    $position = [];
                 }   
+
+                return $result;
                 
                 foreach($result as $item)
                 {
