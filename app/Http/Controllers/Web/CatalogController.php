@@ -90,7 +90,7 @@ class CatalogController extends Controller
 
                 $cells = $spreadsheet->getActiveSheet()->getCellCollection();
 
-                return $cells->getHighestRow();
+                return $cells->get('A'.1)->getValue();
                         
                 $result = [];
                 $suslik = [];
