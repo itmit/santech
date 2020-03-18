@@ -23,4 +23,4 @@ Route::get('/estimate', function () {
     return view('pdf.estimate');
 });
 
-Route::get('/uploadcatalog', 'Web\CatalogController@uploadCatalog');
+Route::post('/uploadcatalog', 'Web\CatalogController@uploadCatalog')->name('uploadCatalog');

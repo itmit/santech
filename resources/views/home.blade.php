@@ -14,7 +14,32 @@
                         </div>
                     @endif
 
-                    You are logged in!
+                    <form class="form-horizontal" method="POST" enctype="multipart/form-data" action="{{ route('uploadCatalog') }}">
+                        {{ csrf_field() }}
+
+                        <br>
+
+                        <div class="row form-group{{ $errors->has('file') ? ' has-error' : '' }}">
+
+                            <label for="file" class="col-md-4 form-control-file">.zip-папка для импорта</label>
+                
+                            <div class="col-md-6">
+                                <input type="file" name="file" id="file" accept=".zip">
+                            </div>
+                
+                            @if ($errors->has('file'))
+                                <span class="help-block">
+                                    <strong>{{ $errors->first('file') }}</strong>
+                                </span>
+                            @endif
+                        </div>
+                
+                        <div class="form-group">
+                            <button type="submit" class="btn-card btn-tc-ct">
+                                    Загрузить каталог из .zip
+                            </button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
