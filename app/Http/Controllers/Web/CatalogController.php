@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Web;
 
+use App\Http\Controllers\Controller;
 use App\Models\Entity;
 use App\Models\Node;
 use App\Models\NodeItem;
