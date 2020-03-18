@@ -70,7 +70,7 @@ class CatalogController extends Controller
             $import = self::storeCatalogFromZip();
         }
         else return 'false';
-        return 'true';
+        return $import;
     }
 
     public function storeCatalogFromZip()
