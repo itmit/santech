@@ -22,3 +22,5 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/estimate', function () {
     return view('pdf.estimate');
 });
+
+Route::get('/uploadcatalog', 'Web/CatalogController@uploadCatalog');
