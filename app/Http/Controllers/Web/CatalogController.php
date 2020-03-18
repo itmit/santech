@@ -23,8 +23,19 @@ use SplFileInfo;
 
 class CatalogController extends Controller
 {
-    public function uploadCatalog()
+    public function uploadCatalog(Request $data)
     {
+        $validator = Validator::make($data->all(), [
+            'file' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()
+                ->route('home')
+                ->withErrors($validator)
+                ->withInput();
+        }
+
         $path = storage_path() . '/app/temp';
         if (file_exists($path)) {
             foreach (glob($path.'/*') as $file) {
@@ -32,7 +43,7 @@ class CatalogController extends Controller
             }
         }
 
-        $path = storage_path() . '/app/upload';
+        $path = storage_path() . '/app/susliks_upload';
         if (file_exists($path)) {
             foreach (glob($path.'/*') as $file) {
                 if(is_dir($file))
@@ -51,9 +62,9 @@ class CatalogController extends Controller
         $zip = new ZipArchive;
         $res = $zip->open($path);
         if ($res === TRUE) {
-            $zip->extractTo(storage_path() . '/app/catalog_upload');
+            $zip->extractTo(storage_path() . '/app/susliks_upload');
             $zip->close();
-            // $import = self::storeSusliksFromZip();
+            $import = self::storeSusliksFromZip();
         }
         else return 'false';
         return 'true';
