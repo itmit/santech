@@ -121,7 +121,7 @@ class EntityApiController extends ApiBaseController
 
     public function edit($uuid)
     {
-        $entity = Entity::where('uuid', $uuid)->first(['uuid', 'name']);
+        $entity = Entity::where('uuid', $uuid)->first(['id', 'uuid', 'name']);
 
         $nodes = Node::where('entity_id', $entity->id)->get();
 
@@ -135,11 +135,11 @@ class EntityApiController extends ApiBaseController
             $items = [];
             foreach ($node->getItems() as $item) {
                 $items[] = [
-                    // 'uuid' => $item->uuid,
+                    'uuid' => $item->uuid,
                     'name' => $item->name,
                     'count' => $item->count,
                     'amount' => $item->amount,
-                    // 'description' => $item->description
+                    'description' => $item->description
                 ];
             }
             $result[] = [
