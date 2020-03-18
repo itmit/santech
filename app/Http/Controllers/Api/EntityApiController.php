@@ -135,7 +135,7 @@ class EntityApiController extends ApiBaseController
             $items = [];
             foreach ($node->getItems() as $item) {
                 $items[] = [
-                    'uuid' => $item->uuid,
+                    // 'uuid' => $item->uuid,
                     'name' => $item->name,
                     'count' => $item->count,
                     'amount' => $item->amount,
@@ -149,7 +149,7 @@ class EntityApiController extends ApiBaseController
             ];
         };
 
-        return $this->sendResponse($result, "Object's nodes");
+        return $this->sendResponse($result, "Object's nodes and items for edit");
     }
 
     public function update(Request $request, $uuid)

@@ -22,7 +22,5 @@ class Node extends Model
         ->join('items', 'node_items.item_id', '=', 'items.id')
         ->select('items.uuid', 'items.name', 'node_items.count', 'node_items.amount', 'node_items.description')
         ->get();
-
-        // return $this->hasMany(NodeItem::class, 'node_id')->get();
     }
 }
