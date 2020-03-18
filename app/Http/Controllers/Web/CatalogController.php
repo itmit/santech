@@ -59,12 +59,14 @@ class CatalogController extends Controller
             }
         }
 
+        $file = $data->file('file');
+        $path = storage_path() . '/app/' . $file->store('temp');
         $zip = new ZipArchive;
         $res = $zip->open($path);
         if ($res === TRUE) {
             $zip->extractTo(storage_path() . '/app/susliks_upload');
             $zip->close();
-            $import = self::storeSusliksFromZip();
+            // $import = self::storeSusliksFromZip();
         }
         else return 'false';
         return 'true';
