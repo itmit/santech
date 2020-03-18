@@ -37,5 +37,3 @@ Route::group(['middleware' => 'auth:api'], function(){
     Route::get('test', 'Api\AuthApiController@test');
     
 });
-
-Route::delete('node/destroyItemFromNode/{uuid}', 'Api\NodeApiController@destroyItemFromNode');

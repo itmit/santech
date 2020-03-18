@@ -119,6 +119,85 @@ class EntityApiController extends ApiBaseController
         return $this->sendResponse($result, "Object's nodes");
     }
 
+    public function edit($uuid)
+    {
+        $entity = Entity::where('uuid', $uuid)->first();
+
+        $nodes = Node::where('entity_id', $entity->id)->get();
+
+        $result = [];
+
+        $result[] = [
+            'entity' => $entity,
+        ];
+
+        foreach ($nodes as $node) {
+            $items = [];
+            foreach ($node->getItems() as $item) {
+                $items[] = [
+                    'uuid' => $item->uuid,
+                    'name' => $item->name,
+                    'count' => $item->count,
+                    'amount' => $item->amount,
+                    'description' => $item->description
+                ];
+            }
+            $result[] = [
+                'uuid' => $node->uuid,
+                'name' => $node->name,
+                'items' => $items
+            ];
+        };
+
+        return $this->sendResponse($result, "Object's nodes");
+    }
+
+    public function update(Request $request, $uuid)
+    {
+        $validator = Validator::make($request->all(), [ 
+            'name' => 'required|string|min:2|max:191',
+            'data' => 'array',
+        ]);
+        
+        if ($validator->fails()) { 
+            return response()->json(['errors'=>$validator->errors()], 400);            
+        }
+
+        try {
+            DB::transaction(function () use ($request) {
+                $this->obj = Entity::create([
+                    'uuid' => Str::uuid(),
+                    'client_id' => auth('api')->user()->id,
+                    'name' => $request->name
+                ]);
+                if(!empty($request->data))
+                {
+                    foreach ($request->data as $node) {
+                    $nodeObj = Node::create([
+                        'entity_id' => $this->obj->id,
+                        'uuid' => Str::uuid(),
+                        'name' => $node['name']
+                    ]);
+                        foreach ($node['items'] as $item) {
+                            $nodeItm = NodeItem::create([
+                                'node_id' => $nodeObj->id,
+                                'item_id' => $item['id'],
+                                'uuid' => Str::uuid(),
+                                'count' => $item['count'],
+                                'amount' => $item['amount'],
+                                'description' => $item['Description'],
+                            ]);
+                        }
+                    }
+                }
+            });
+        } catch (\Throwable $th) {
+            return $th;
+        }
+
+        return $this->sendResponse([$this->obj], 'Entity created');
+    }
+
     public function getEstimatePDF($uuid)
     {
         $entity = Entity::where('uuid', $uuid)
