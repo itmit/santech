@@ -139,7 +139,7 @@ class EntityApiController extends ApiBaseController
                     'name' => $item->name,
                     'count' => $item->count,
                     'amount' => $item->amount,
-                    'description' => $item->description
+                    // 'description' => $item->description
                 ];
             }
             $result[] = [
