@@ -81,7 +81,7 @@ class EntityApiController extends ApiBaseController
 
         try {
             DB::transaction(function () use ($obj, $node) {
-                if($node->id != null)
+                if($node != null)
                 {
                     $items = NodeItem::where('node_id', $node->id)->delete();
                     $node->delete();
