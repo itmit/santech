@@ -73,7 +73,7 @@ class CatalogController extends Controller
             $import = self::storeCatalogFromZip();
         }
         else return 'false';
-        return $import;
+        dd($import);
     }
 
     public function storeCatalogFromZip()
@@ -108,7 +108,7 @@ class CatalogController extends Controller
 
                 for ($row = 2; $row <= $cells->getHighestRow(); $row++){
                     for ($col = 'A'; $col <= 'D'; $col++) {
-                        return $position[$col] = $cells->get($col.$row)->getValue();
+                        $position[$col] = $cells->get($col.$row)->getValue();
                     }
                     $result[$row] = $position;
                     $position = [];
