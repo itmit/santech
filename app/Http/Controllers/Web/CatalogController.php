@@ -47,7 +47,7 @@ class CatalogController extends Controller
                 }
             }
         }
-return $path;
+
         $zip = new ZipArchive;
         $res = $zip->open($path);
         if ($res === TRUE) {
