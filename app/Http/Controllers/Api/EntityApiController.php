@@ -32,7 +32,7 @@ class EntityApiController extends ApiBaseController
     {
         $validator = Validator::make($request->all(), [ 
             'name' => 'required|string|min:2|max:191',
-            'data' => 'required|array',
+            'data' => 'array',
         ]);
         
         if ($validator->fails()) { 
@@ -46,22 +46,24 @@ class EntityApiController extends ApiBaseController
                     'client_id' => auth('api')->user()->id,
                     'name' => $request->name
                 ]);
-
-                foreach ($request->data as $node) {
+                if (!empty($request->data))
+                {
+                    foreach ($request->data as $node) {
                     $nodeObj = Node::create([
                         'entity_id' => $this->obj->id,
                         'uuid' => Str::uuid(),
                         'name' => $node['name']
                     ]);
-                    foreach ($node['items'] as $item) {
-                        $nodeItm = NodeItem::create([
-                            'node_id' => $nodeObj->id,
-                            'item_id' => $item['id'],
-                            'uuid' => Str::uuid(),
-                            'count' => $item['count'],
-                            'amount' => $item['amount'],
-                            'description' => $item['Description'],
-                        ]);
+                        foreach ($node['items'] as $item) {
+                            $nodeItm = NodeItem::create([
+                                'node_id' => $nodeObj->id,
+                                'item_id' => $item['id'],
+                                'uuid' => Str::uuid(),
+                                'count' => $item['count'],
+                                'amount' => $item['amount'],
+                                'description' => $item['Description'],
+                            ]);
+                        }
                     }
                 }
             });
