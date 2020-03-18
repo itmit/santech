@@ -197,7 +197,6 @@ class EntityApiController extends ApiBaseController
                                     $nodeItm = NodeItem::where('uuid', $item['uuid'])->update([
                                         'node_id' => $nodeObj->id,
                                         'item_id' => $item['id'],
-    
                                         'count' => $item['count'],
                                         'amount' => $item['amount'],
                                         'description' => $item['Description'],
@@ -223,7 +222,7 @@ class EntityApiController extends ApiBaseController
             return $th;
         }
 
-        return $this->sendResponse([$this->obj], 'Entity created');
+        return $this->sendResponse([$this->obj], 'Entity updated');
     }
 
     public function getEstimatePDF($uuid)
