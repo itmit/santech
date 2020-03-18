@@ -105,7 +105,7 @@ class CatalogController extends Controller
                     'name' => $cells->get($col1.$row1)->getValue(),
                     'photo' => '/storage/catalog/'.$cells->get($col2.$row2)->getValue()
                 ]);
-                return
+                return;
 
                 for ($row = 1; $row <= $cells->getHighestRow(); $row++){
                     for ($col = 'A'; $col <= 'D'; $col++) {
