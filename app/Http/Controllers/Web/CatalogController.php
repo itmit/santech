@@ -93,7 +93,7 @@ class CatalogController extends Controller
                 $result = [];
                 $suslik = [];
 
-                for ($row = 2; $row <= $cells->getHighestRow(); $row++){
+                for ($row = 1; $row <= $cells->getHighestRow(); $row++){
                     for ($col = 'A'; $col <= 'D'; $col++) {
                         // if($suslik[$col] = $cells->get($col.$row) == NULL)
                         // {
