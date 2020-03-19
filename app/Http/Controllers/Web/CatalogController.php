@@ -130,22 +130,18 @@ class CatalogController extends Controller
                         'photo' => '/storage/catalog/'.$item['D'],
                     ]);
 
-                    foreach($files as $suslikImage)
+                    foreach($files as $categoryImage)
                     { 
-                        $imageName = new SplFileInfo($suslikImage);
-                        if($imageName->getFilename() == $item['F'])
+                        $imageName = new SplFileInfo($categoryImage);
+                        if($imageName->getFilename() == $item['D'])
                         {
                             $imageExtension = $imageName->getExtension();
-                            $urlImage = storage_path() . '/app/susliks_upload/' . $imageName;
+                            $urlImage = storage_path() . '/app/catalog_upload/' . $imageName;
 
                             if (file_exists($urlImage))
                             {
                                 $photo = $newSuslik->uuid;
-                                rename($urlImage, storage_path() . '/app/public/susliks/' . $photo . '.' . $imageExtension);
-                                
-                                Suslik::where('id', '=', $newSuslik->id)->update([
-                                    'photo' => $photo . '.' . $imageExtension
-                                ]);  
+                                rename($urlImage, storage_path() . '/app/public/catalog/category/' . $photo . '.' . $imageExtension);
                             }                          
                         }
                     }
