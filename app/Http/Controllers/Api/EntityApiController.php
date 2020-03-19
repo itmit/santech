@@ -209,7 +209,7 @@ class EntityApiController extends ApiBaseController
                                 }
                                 else
                                 {
-                                    $item = Item::where('uuid', $item['uuid'])->first();
+                                    $newItem = Item::where('uuid', $item['uuid'])->first();
                                     $nodeItm = NodeItem::create([
                                         'node_id' => $nodeObj->id,
                                         'item_id' => $newItem->id,
