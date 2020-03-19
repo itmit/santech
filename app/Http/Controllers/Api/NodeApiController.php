@@ -108,7 +108,6 @@ class NodeApiController extends ApiBaseController
             'uuid_node' => 'required|uuid|exists:nodes,uuid',
             'count' => 'required',
             'amount' => 'required',
-            'description' => 'required',
         ]);
         
         if ($validator->fails()) { 
