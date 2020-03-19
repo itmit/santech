@@ -124,7 +124,7 @@ class CatalogController extends Controller
                     }
 
                     Category::create([
-                        'catalog_id' = $catalog->id,
+                        'catalog_id' => $catalog->id,
                         'uuid' => (string) Str::uuid(),
                         'name' => $item['A'],
                         'photo' => '/storage/catalog/'.$item['D'],
