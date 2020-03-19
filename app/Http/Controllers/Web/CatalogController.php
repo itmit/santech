@@ -127,7 +127,7 @@ class CatalogController extends Controller
                         'catalog_id' => $catalog->id,
                         'uuid' => (string) Str::uuid(),
                         'name' => $item['A'],
-                        'photo' => '/storage/catalog/'.$item['D'],
+                        'photo' => '/storage/catalog/category/'.$item['D'],
                     ]);
 
                     foreach($files as $categoryImage)
