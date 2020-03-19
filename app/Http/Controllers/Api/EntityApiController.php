@@ -275,18 +275,18 @@ class EntityApiController extends ApiBaseController
         foreach ($nodes as $node) {
             $items = [];
             foreach ($node->getItems() as $item) {
-                return $this->sendResponse([$item->name], "item");
                 $items[] = [
                     'name' => $item->name,
                     'count' => $item->count,
                     'amount' => $item->amount,
                     'price' => $item->count * $item->amount,
                 ];
+                return $this->sendResponse($items, "items");
                 $total = $total + $item->count * $item->amount;
             }
             $estimate = $items;
         };
 
-        return $this->sendResponse($estimate, "PDF");
+        return $this->sendResponse($estimate, "Estimate");
     }
 }
