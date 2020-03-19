@@ -152,13 +152,13 @@ class CatalogController extends Controller
                         'category_id' => $category->id,
                         'uuid' => (string) Str::uuid(),
                         'name' => $item['C'],
-                        'photo' => '/storage/catalog/category/'.$item['D'],
+                        'photo' => '/storage/catalog/category/item/'.$item['D'],
                     ]);
 
                     foreach($files as $categoryImage)
                     { 
                         $imageName = new SplFileInfo($categoryImage);
-                        if($imageName->getFilename() == $item['D'])
+                        if($imageName->getFilename() == $item['B'])
                         {
                             $imageExtension = $imageName->getExtension();
                             $urlImage = storage_path() . '/app/catalog_upload/' . $imageName;
@@ -166,6 +166,16 @@ class CatalogController extends Controller
                             if (file_exists($urlImage))
                             {
                                 rename($urlImage, storage_path() . '/app/public/catalog/category/' . $imageName);
+                            }                          
+                        }
+                        if($imageName->getFilename() == $item['D'])
+                        {
+                            $imageExtension = $imageName->getExtension();
+                            $urlImage = storage_path() . '/app/catalog_upload/' . $imageName;
+
+                            if (file_exists($urlImage))
+                            {
+                                rename($urlImage, storage_path() . '/app/public/catalog/category/item/' . $imageName);
                             }                          
                         }
                     }
