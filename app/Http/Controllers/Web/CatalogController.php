@@ -153,6 +153,7 @@ class CatalogController extends Controller
                             $imageExtension = $imageName->getExtension();
                             $urlImage = storage_path() . '/app/catalog_upload/' . $imageName;
 
+                            return $imageName;
                             if (file_exists($urlImage))
                             {
                                 rename($urlImage, storage_path() . '/app/public/catalog/category/' . $imageName . '.' . $imageExtension);
