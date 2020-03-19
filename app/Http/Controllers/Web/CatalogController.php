@@ -115,52 +115,19 @@ class CatalogController extends Controller
                     $result[$row] = $position;
                     $position = [];
                 }   
-
-                return $result;
                 
                 foreach($result as $item)
                 {
-                    $categoryID = SusliksCategory::where('name', '=', $item['E'])->first('id');
-                    if($categoryID == NULL)
+                    if(Category::where('name', '=', $item['A'])->exists())
                     {
                         continue;
                     }
 
-                    $isSuslikExists = Suslik::where('number', '=', $item['A'])->first();
-                    if($isSuslikExists != NULL)
-                    {
-                        continue;
-                    }
-
-                    $newSuslik = Suslik::create([
+                    Category::create([
                         'uuid' => (string) Str::uuid(),
-                        'name' => $item['B'],
-                        'number' => $item['A'],
-                        'place_of_work' => $item['C'],
-                        'position' => $item['D'],
-                        'category' => $categoryID->id,
-                        'link' => $item['G'],
+                        'name' => $item['A'],
+                        'photo' => '/storage/catalog/'.$item['D'],
                     ]);
-
-                    foreach($files as $suslikImage)
-                    { 
-                        $imageName = new SplFileInfo($suslikImage);
-                        if($imageName->getFilename() == $item['F'])
-                        {
-                            $imageExtension = $imageName->getExtension();
-                            $urlImage = storage_path() . '/app/susliks_upload/' . $imageName;
-
-                            if (file_exists($urlImage))
-                            {
-                                $photo = $newSuslik->uuid;
-                                rename($urlImage, storage_path() . '/app/public/susliks/' . $photo . '.' . $imageExtension);
-                                
-                                Suslik::where('id', '=', $newSuslik->id)->update([
-                                    'photo' => $photo . '.' . $imageExtension
-                                ]);  
-                            }                          
-                        }
-                    }
                 }
             }      
         }
@@ -172,7 +139,7 @@ class CatalogController extends Controller
             }
         }
 
-        $path = storage_path() . '/app/susliks_upload';
+        $path = storage_path() . '/app/catalog_upload';
         if (file_exists($path)) {
             foreach (glob($path.'/*') as $file) {
                 if(is_dir($file))
