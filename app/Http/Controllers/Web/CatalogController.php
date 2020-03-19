@@ -165,7 +165,7 @@ class CatalogController extends Controller
 
                             if (file_exists($urlImage))
                             {
-                                rename($urlImage, storage_path() . '/app/public/catalog/category/' . $imageName);
+                                copy($urlImage, storage_path() . '/app/public/catalog/category/' . $imageName);
                             }                          
                         }
                         if($imageName->getFilename() == $item['D'])
@@ -175,7 +175,7 @@ class CatalogController extends Controller
 
                             if (file_exists($urlImage))
                             {
-                                rename($urlImage, storage_path() . '/app/public/catalog/category/item/' . $imageName);
+                                copy($urlImage, storage_path() . '/app/public/catalog/category/item/' . $imageName);
                             }                          
                         }
                     }
