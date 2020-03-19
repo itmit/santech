@@ -170,11 +170,12 @@ class EntityApiController extends ApiBaseController
 
         try {
             DB::transaction(function () use ($request, $uuid) {
-                $this->obj = Entity::where('uuid', $uuid)->update([
+                Entity::where('uuid', $uuid)->update([
                     'name' => $request->name
                 ]);
                 if(!empty($request->data))
                 {
+                    $this->obj = Entity::where('uuid', $uuid)->first();
                     foreach ($request->data as $node) {
                         if(Node::where('uuid', $node['uuid'])->exists())
                         {
