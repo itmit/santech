@@ -100,7 +100,7 @@ class CatalogController extends Controller
                 $col1 = 'A';
                 $row2 = 1;
                 $col2 = 'B';
-                Catalog::create([
+                $catalog = Catalog::create([
                     'uuid' => Str::uuid(),
                     'name' => $cells->get($col1.$row1)->getValue(),
                     'photo' => '/storage/catalog/'.$cells->get($col2.$row2)->getValue()
@@ -124,6 +124,7 @@ class CatalogController extends Controller
                     }
 
                     Category::create([
+                        'catalog_id' = $catalog->id,
                         'uuid' => (string) Str::uuid(),
                         'name' => $item['A'],
                         'photo' => '/storage/catalog/'.$item['D'],
