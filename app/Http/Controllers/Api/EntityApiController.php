@@ -285,7 +285,7 @@ class EntityApiController extends ApiBaseController
             }
             $estimate = $items;
         };
-        return $this->sendResponse($nodes, "nodes");
+        return $this->sendResponse($nodes->toArray(), "nodes");
 
         return $this->sendResponse($estimate, "Estimate");
     }
