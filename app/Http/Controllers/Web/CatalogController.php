@@ -140,7 +140,6 @@ class CatalogController extends Controller
 
                             if (file_exists($urlImage))
                             {
-                                $photo = $newSuslik->uuid;
                                 rename($urlImage, storage_path() . '/app/public/catalog/category/' . $photo . '.' . $imageExtension);
                             }                          
                         }
