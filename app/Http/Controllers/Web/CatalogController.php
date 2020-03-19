@@ -96,15 +96,19 @@ class CatalogController extends Controller
                 $result = [];
                 $position = [];
 
-                $row1 = 1;
-                $col1 = 'A';
-                $row2 = 1;
-                $col2 = 'B';
-                $catalog = Catalog::create([
-                    'uuid' => Str::uuid(),
-                    'name' => $cells->get($col1.$row1)->getValue(),
-                    'photo' => '/storage/catalog/'.$cells->get($col2.$row2)->getValue()
-                ]);
+                if(!Catalog::where('name', $cells->get($col1.$row1)->getValue())->exists())
+                {
+                    $row1 = 1;
+                    $col1 = 'A';
+                    $row2 = 1;
+                    $col2 = 'B';
+                    $catalog = Catalog::create([
+                        'uuid' => Str::uuid(),
+                        'name' => $cells->get($col1.$row1)->getValue(),
+                        'photo' => '/storage/catalog/'.$cells->get($col2.$row2)->getValue()
+                    ]);
+                }
+                else $catalog = Catalog::where('name', $cells->get($col1.$row1)->getValue())->first();
 
                 foreach($files as $categoryImage)
                 { 
@@ -116,7 +120,7 @@ class CatalogController extends Controller
 
                         if (file_exists($urlImage))
                         {
-                            rename($urlImage, storage_path() . '/app/public/catalog/' . $imageName . '.' . $imageExtension);
+                            rename($urlImage, storage_path() . '/app/public/catalog/' . $imageName);
                         }                          
                     }
                 }
@@ -156,7 +160,7 @@ class CatalogController extends Controller
                             return $imageName;
                             if (file_exists($urlImage))
                             {
-                                rename($urlImage, storage_path() . '/app/public/catalog/category/' . $imageName . '.' . $imageExtension);
+                                rename($urlImage, storage_path() . '/app/public/catalog/category/' . $imageName);
                             }                          
                         }
                     }
