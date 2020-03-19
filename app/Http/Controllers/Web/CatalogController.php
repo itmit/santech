@@ -96,10 +96,10 @@ class CatalogController extends Controller
                 $result = [];
                 $position = [];
 
+                $row1 = 1;
+                $col1 = 'A';
                 if(!Catalog::where('name', $cells->get($col1.$row1)->getValue())->exists())
                 {
-                    $row1 = 1;
-                    $col1 = 'A';
                     $row2 = 1;
                     $col2 = 'B';
                     $catalog = Catalog::create([
