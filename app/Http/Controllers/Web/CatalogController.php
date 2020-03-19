@@ -140,7 +140,7 @@ class CatalogController extends Controller
 
                             if (file_exists($urlImage))
                             {
-                                rename($urlImage, storage_path() . '/app/public/catalog/category/' . $photo . '.' . $imageExtension);
+                                rename($urlImage, storage_path() . '/app/public/catalog/category/' . $imageName . '.' . $imageExtension);
                             }                          
                         }
                     }
