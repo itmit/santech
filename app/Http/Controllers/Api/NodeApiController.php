@@ -40,7 +40,7 @@ class NodeApiController extends ApiBaseController
         ]);
         
         if ($validator->fails()) { 
-            return response()->json(['errors'=>$validator->errors()], 401);            
+            return response()->json(['errors'=>$validator->errors()], 400);            
         }
 
         $entity = Entity::where('uuid', $request->uuid)->first();
@@ -112,7 +112,7 @@ class NodeApiController extends ApiBaseController
         ]);
         
         if ($validator->fails()) { 
-            return response()->json(['errors'=>$validator->errors()], 401);            
+            return response()->json(['errors'=>$validator->errors()], 400);            
         }
 
         $node = Node::where('uuid', $request->uuid_node)->first();
