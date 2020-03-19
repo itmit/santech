@@ -197,9 +197,10 @@ class EntityApiController extends ApiBaseController
                             foreach ($node['items'] as $item) {
                                 if(NodeItem::where('uuid', $item['uuid'])->exists())
                                 {
+                                    $newItem = Item::where('uuid', $item['uuid'])->first();
                                     $nodeItm = NodeItem::where('uuid', $item['uuid'])->update([
                                         'node_id' => $nodeObj->id,
-                                        'item_id' => $item['id'],
+                                        'item_id' => $newItem->id,
                                         'count' => $item['count'],
                                         'amount' => $item['amount'],
                                         'description' => $item['Description'],
@@ -207,9 +208,10 @@ class EntityApiController extends ApiBaseController
                                 }
                                 else
                                 {
+                                    $item = Item::where('uuid', $item['uuid'])->first();
                                     $nodeItm = NodeItem::create([
                                         'node_id' => $nodeObj->id,
-                                        'item_id' => $item['id'],
+                                        'item_id' => $newItem->id,
                                         'uuid' => Str::uuid(),
                                         'count' => $item['count'],
                                         'amount' => $item['amount'],
