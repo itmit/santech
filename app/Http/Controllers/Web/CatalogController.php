@@ -137,7 +137,7 @@ class CatalogController extends Controller
                 
                 foreach($result as $item)
                 {
-                    if(!Category::where('name', '=', $item['A'])->exists())
+                    if(!Category::where('name', '=', $item['A'])->where('catalog_id', $catalog->id)->exists())
                     {
                         $category = Category::create([
                             'catalog_id' => $catalog->id,
@@ -146,7 +146,7 @@ class CatalogController extends Controller
                             'photo' => '/storage/catalog/category/'.$item['B'],
                         ]);
                     }
-                    else $category = Category::where('name', $item['A'])->first();
+                    else $category = Category::where('name', $item['A'])->where('catalog_id', $catalog->id)->first();
 
                     Item::create([
                         'category_id' => $category->id,
