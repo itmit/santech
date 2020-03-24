@@ -133,14 +133,14 @@ class CatalogController extends Controller
                         {
                             $imageExtension = $imageName->getExtension();
                             $urlImage = storage_path() . '/app/catalog_upload/' . $imageName;
-                            
 
                             if (file_exists($urlImage))
                             {
                                 copy($urlImage, storage_path() . '/app/public/catalog/' . $imageName);
-                                return 'yes';
+                                Catalog::where('id', $catalog->id)->update([
+                                    'photo' => '/storage/catalog/'.$cells->get($col2.$row2)->getValue()
+                                ]);
                             }
-                            else return 'no';
                         }
                     }
                 }
