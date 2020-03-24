@@ -98,10 +98,10 @@ class CatalogController extends Controller
 
                 $row1 = 1;
                 $col1 = 'A';
+                $row2 = 1;
+                $col2 = 'B';
                 if(!Catalog::where('name', $cells->get($col1.$row1)->getValue())->exists())
                 {
-                    $row2 = 1;
-                    $col2 = 'B';
                     $catalog = Catalog::create([
                         'uuid' => Str::uuid(),
                         'name' => $cells->get($col1.$row1)->getValue(),
