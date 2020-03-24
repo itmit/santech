@@ -165,12 +165,15 @@ class CatalogController extends Controller
                     }
                     else $category = Category::where('name', $item['A'])->where('catalog_id', $catalog->id)->first();
 
-                    Item::create([
-                        'category_id' => $category->id,
-                        'uuid' => (string) Str::uuid(),
-                        'name' => $item['C'],
-                        'photo' => '/storage/catalog/category/item/'.$item['D'],
-                    ]);
+                    if(!Item::where('name', '=', $item['C'])->where('category_id', $category->id)->exists())
+                    {
+                        Item::create([
+                            'category_id' => $category->id,
+                            'uuid' => (string) Str::uuid(),
+                            'name' => $item['C'],
+                            'photo' => '/storage/catalog/category/item/'.$item['D'],
+                        ]);
+                    }
 
                     foreach($files as $categoryImage)
                     { 
