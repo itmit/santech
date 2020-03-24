@@ -133,12 +133,14 @@ class CatalogController extends Controller
                         {
                             $imageExtension = $imageName->getExtension();
                             $urlImage = storage_path() . '/app/catalog_upload/' . $imageName;
-                            return $urlImage;
+                            
 
                             if (file_exists($urlImage))
                             {
                                 copy($urlImage, storage_path() . '/app/public/catalog/' . $imageName);
-                            }                          
+                                return 'yes';
+                            }
+                            else return 'no';
                         }
                     }
                 }
