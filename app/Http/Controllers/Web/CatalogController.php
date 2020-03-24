@@ -118,12 +118,29 @@ class CatalogController extends Controller
 
                             if (file_exists($urlImage))
                             {
-                                rename($urlImage, storage_path() . '/app/public/catalog/' . $imageName);
+                                copy($urlImage, storage_path() . '/app/public/catalog/' . $imageName);
                             }                          
                         }
                     }
                 }
-                else $catalog = Catalog::where('name', $cells->get($col1.$row1)->getValue())->first();
+                else
+                {
+                    $catalog = Catalog::where('name', $cells->get($col1.$row1)->getValue())->first();
+                    foreach($files as $categoryImage)
+                    { 
+                        $imageName = new SplFileInfo($categoryImage);
+                        if($imageName->getFilename() == $cells->get($col2.$row2)->getValue())
+                        {
+                            $imageExtension = $imageName->getExtension();
+                            $urlImage = storage_path() . '/app/catalog_upload/' . $imageName;
+
+                            if (file_exists($urlImage))
+                            {
+                                copy($urlImage, storage_path() . '/app/public/catalog/' . $imageName);
+                            }                          
+                        }
+                    }
+                }
 
                 for ($row = 2; $row <= $cells->getHighestRow(); $row++){
                     for ($col = 'A'; $col <= 'D'; $col++) {

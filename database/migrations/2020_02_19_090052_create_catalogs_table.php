@@ -17,7 +17,7 @@ class CreateCatalogsTable extends Migration
             $table->bigIncrements('id');
             $table->uuid('uuid');
             $table->string('name');
-            $table->string('code');
+            // $table->string('code');
             $table->text('photo');
             $table->timestamps();
             $table->softDeletes();
