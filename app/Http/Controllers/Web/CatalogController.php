@@ -131,9 +131,9 @@ class CatalogController extends Controller
                         $imageName = new SplFileInfo($categoryImage);
                         if($imageName->getFilename() == $cells->get($col2.$row2)->getValue())
                         {
-                            return $imageName->getFilename();
                             $imageExtension = $imageName->getExtension();
                             $urlImage = storage_path() . '/app/catalog_upload/' . $imageName;
+                            return $urlImage;
 
                             if (file_exists($urlImage))
                             {
