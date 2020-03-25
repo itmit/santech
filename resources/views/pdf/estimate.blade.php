@@ -9,6 +9,7 @@
             <table style="width: 100%; text-align: center">
                 <thead>
                   <tr>
+                    <th>№ п/п</th>
                     <th>Наименование</th>
                     <th>Кол-во</th>
                     <th>Цена</th>
@@ -16,13 +17,16 @@
                   </tr>
                 </thead>
                 <tbody>
+                  <?php $i=1?>
                   @foreach($estimate as $item)
                     <tr>
+                      <td>{{ $i }}</td>
                       <td>{{ $item['name'] }}</td>
                       <td>{{ $item['count'] }}</td>
                       <td>{{ $item['amount'] }}</td>
                       <td>{{ $item['price'] }}</td>
                     </tr>
+                    <?php $i++?>
                   @endforeach
                   <tr>
                     <td><b>Итого</b></td>
