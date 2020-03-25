@@ -251,8 +251,9 @@ class EntityApiController extends ApiBaseController
                     'price' => $item->count * $item->amount,
                 ];
                 $total = $total + $item->count * $item->amount;
+                $estimate[] = $items;
             }
-            $estimate[] = $items;
+            
         };
 
         $pdf = PDF::loadView('pdf.estimate', ['estimate' => $estimate, 'entity' => $entity, 'total' => $total]);
