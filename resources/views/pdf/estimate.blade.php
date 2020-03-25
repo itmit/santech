@@ -23,7 +23,7 @@
                       <td>{{ $i }}</td>
                       <td style="text-align: left">{{ $item['name'] }}</td>
                       <td style="text-align: right">{{ $item['count'] }}</td>
-                      <td style="text-align: right">>{{ $item['amount'] }}</td>
+                      <td style="text-align: right">{{ $item['amount'] }}</td>
                       <td style="text-align: left">{{ $item['price'] }}</td>
                     </tr>
                     <?php $i++?>
