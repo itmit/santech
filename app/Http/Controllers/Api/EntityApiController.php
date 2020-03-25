@@ -284,8 +284,8 @@ class EntityApiController extends ApiBaseController
                     'price' => $item->count * $item->amount,
                 ];
                 $total = $total + $item->count * $item->amount;
+                $estimate[] = $items;
             }
-            $estimate[] = $items;
         };
 
         return $this->sendResponse($estimate, "Estimate");
