@@ -13,7 +13,7 @@
                     <th style="text-align: left">Наименование</th>
                     <th style="text-align: right">Кол-во</th>
                     <th style="text-align: right">Цена</th>
-                    <th style="text-align: right">Итого</th>
+                    <th style="text-align: left">Итого</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -21,10 +21,10 @@
                   @foreach($estimate as $item)
                     <tr>
                       <td>{{ $i }}</td>
-                      <td>{{ $item['name'] }}</td>
-                      <td>{{ $item['count'] }}</td>
-                      <td>{{ $item['amount'] }}</td>
-                      <td>{{ $item['price'] }}</td>
+                      <td style="text-align: left">{{ $item['name'] }}</td>
+                      <td style="text-align: right">{{ $item['count'] }}</td>
+                      <td style="text-align: right">>{{ $item['amount'] }}</td>
+                      <td style="text-align: left">{{ $item['price'] }}</td>
                     </tr>
                     <?php $i++?>
                   @endforeach
@@ -33,7 +33,7 @@
                     <td></td>
                     <td></td>
                     <td></td>
-                    <td style="text-align: right">{{ $total }}</td>
+                    <td style="text-align: left">{{ $total }}</td>
                   </tr>
                 </tbody>     
             </table>         
