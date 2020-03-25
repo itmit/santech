@@ -13,7 +13,7 @@
                     <th style="text-align: left">Наименование</th>
                     <th style="text-align: right">Кол-во</th>
                     <th style="text-align: right">Цена</th>
-                    <th style="text-align: left">Итого</th>
+                    <th style="text-align: right">Итого</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -24,7 +24,7 @@
                       <td style="text-align: left">{{ $item['name'] }}</td>
                       <td style="text-align: right">{{ $item['count'] }}</td>
                       <td style="text-align: right">{{ $item['amount'] }}</td>
-                      <td style="text-align: left">{{ $item['price'] }}</td>
+                      <td style="text-align: right">{{ $item['price'] }}</td>
                     </tr>
                     <?php $i++?>
                   @endforeach
