@@ -4,16 +4,16 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-12">
-            <p><b>{{ $entity->name }}</b></p>
+            <p style="text-align: center"><b>{{ $entity->name }}</b></p>
             {{-- <h1>Наименование объекта</h1> --}}
-            <table style="width: 100%; text-align: center">
+            <table class="table-bordered" style="width: 100%;">
                 <thead>
                   <tr>
                     <th>№ п/п</th>
-                    <th>Наименование</th>
-                    <th>Кол-во</th>
-                    <th>Цена</th>
-                    <th>Итого</th>
+                    <th style="text-align: left">Наименование</th>
+                    <th style="text-align: right">Кол-во</th>
+                    <th style="text-align: right">Цена</th>
+                    <th style="text-align: right">Итого</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -29,10 +29,11 @@
                     <?php $i++?>
                   @endforeach
                   <tr>
-                    <td><b>Итого</b></td>
+                    <td style="text-align: left"><b>Итого</b></td>
                     <td></td>
                     <td></td>
-                    <td>{{ $total }}</td>
+                    <td></td>
+                    <td style="text-align: right">{{ $total }}</td>
                   </tr>
                 </tbody>     
             </table>         
