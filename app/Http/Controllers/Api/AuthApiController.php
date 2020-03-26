@@ -154,10 +154,8 @@ class AuthApiController extends ApiBaseController
             'code' => $code
         ]);
 
-        // На случай если какая-то строка письма длиннее 70 символов мы используем wordwrap()
         $message = wordwrap($message, 70, "\r\n");
 
-        // Отправляем
         mail($request->email, 'СанТех. Сброс пароля', $message);
     }
     
@@ -183,6 +181,19 @@ class AuthApiController extends ApiBaseController
             ]);
         }
         else return response()->json(['error'=>'Wrong code'], 400);     
+
+        return $this->sendResponse([], 'Пароль успешно сменен');
+    }
+
+    public function changePassword(Request $request)
+    {
+        $validator = Validator::make($request->all(), [ 
+            'password' => 'required|confirmed'
+        ]);
+
+        Client::where('id', Auth::id())->update([
+            'password' => Hash::make($request->password),
+        ]);
 
         return $this->sendResponse([], 'Пароль успешно сменен');
     }
