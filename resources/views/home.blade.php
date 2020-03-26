@@ -43,7 +43,7 @@
                     <ul class="nav nav-tabs">
                         @foreach ($catalogs as $catalog)
                         <li>
-                            <a data-toggle="tab" href="#c{{$catalog->id}}" class="active show">{{$catalog->name}}</a>
+                            <a data-toggle="tab" href="#c{{$catalog->id}}">{{$catalog->name}}</a>
                         </li>
                         @endforeach
                     </ul>

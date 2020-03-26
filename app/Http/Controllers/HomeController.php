@@ -28,7 +28,7 @@ class HomeController extends Controller
     {
         return view('home',
         [
-            'catalogs' => Category::get(),
+            'catalogs' => Catalog::get(),
         ]);
     }
 }
