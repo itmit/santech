@@ -117,14 +117,21 @@ class NodeApiController extends ApiBaseController
         $node = Node::where('uuid', $request->uuid_node)->first();
         $item = Item::where('uuid', $request->uuid_item)->first();
 
-        NodeItem::create([
-            'node_id' => $node->id,
-            'item_id' => $item->id,
-            'uuid' => Str::uuid(),
-            'count' => $request->count,
-            'amount' => $request->amount,
-            'description' => $request->description,
-        ]);
+        if(NodeItem::where('node_id', $node->id)->where('item_id', $item->id)->exists())
+        {
+            NodeItem::where('node_id', $node->id)->where('item_id', $item->id)->increment('count', $request->count);
+        }
+        else
+        {
+            NodeItem::create([
+                'node_id' => $node->id,
+                'item_id' => $item->id,
+                'uuid' => Str::uuid(),
+                'count' => $request->count,
+                'amount' => $request->amount,
+                'description' => $request->description,
+            ]);
+        }
 
         return $this->sendResponse([], 'Item added');
     }
