@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Item;
+use App\Models\Category;
+use App\Models\Catalog;
 
 class HomeController extends Controller
 {
@@ -25,7 +28,7 @@ class HomeController extends Controller
     {
         return view('home',
         [
-            'i' => 1,
+            'catalogs' => Category::get(),
         ]);
     }
 }

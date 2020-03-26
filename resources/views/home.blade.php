@@ -40,7 +40,13 @@
                             </button>
                         </div>
                     </form>
-                    {{$i}}
+                    <ul class="nav nav-tabs">
+                        @foreach ($catalogs as $catalog)
+                        <li>
+                            <a data-toggle="tab" href="#c{{$catalog->id}}" class="active show">{{$catalog->name}}</a>
+                        </li>
+                        @endforeach
+                    </ul>
                 </div>
             </div>
         </div>
