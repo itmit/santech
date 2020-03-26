@@ -9,32 +9,32 @@
             <table class="table-bordered" style="width: 100%;">
                 <thead>
                   <tr>
-                    <th>№ п/п</th>
+                    <th style="text-align: left">№ п/п</th>
                     <th style="text-align: left">Наименование</th>
-                    <th style="text-align: right">Кол-во</th>
-                    <th style="text-align: right">Цена</th>
-                    <th style="text-align: right">Итого</th>
+                    <th style="text-align: left">Кол-во</th>
+                    {{-- <th style="text-align: right">Цена</th>
+                    <th style="text-align: right">Итого</th> --}}
                   </tr>
                 </thead>
                 <tbody>
                   <?php $i=1?>
                   @foreach($estimate as $item)
                     <tr>
-                      <td>{{ $i }}</td>
+                      <td style="text-align: right">{{ $i }}</td>
                       <td style="text-align: left">{{ $item['name'] }}</td>
                       <td style="text-align: right">{{ $item['count'] }}</td>
-                      <td style="text-align: right">{{ $item['amount'] }}</td>
-                      <td style="text-align: right">{{ $item['price'] }}</td>
+                      {{-- <td style="text-align: right">{{ $item['amount'] }}</td>
+                      <td style="text-align: right">{{ $item['price'] }}</td> --}}
                     </tr>
                     <?php $i++?>
                   @endforeach
-                  <tr>
+                  {{-- <tr>
                     <td style="text-align: left"><b>Итого</b></td>
                     <td></td>
                     <td></td>
                     <td></td>
                     <td style="text-align: left">{{ $total }}</td>
-                  </tr>
+                  </tr> --}}
                 </tbody>     
             </table>         
         </div>
