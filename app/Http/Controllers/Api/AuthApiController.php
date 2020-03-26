@@ -136,5 +136,55 @@ class AuthApiController extends ApiBaseController
             return $this->sendResponse($error);
         }
     }
+
+    public function sendCode(Request $request)
+    {
+        $validator = Validator::make($request->all(), [ 
+            'email' => 'required|email|exists:clients',
+        ]);
+        
+        if ($validator->fails()) { 
+            return response()->json(['errors'=>$validator->errors()], 401);            
+        }
+
+        $code = random_int(1000, 9999);
+        $message = "Ваш код для сброса пароля: " . $code;
+
+        Client::where('email', $request->email)->update([
+            'code' => $code
+        ]);
+
+        // На случай если какая-то строка письма длиннее 70 символов мы используем wordwrap()
+        $message = wordwrap($message, 70, "\r\n");
+
+        // Отправляем
+        mail($request->email, 'СанТех. Сброс пароля', $message);
+    }
+    
+    public function resetPassword(Request $request)
+    {
+        $validator = Validator::make($request->all(), [ 
+            'email' => 'required|email|exists:clients',
+            'code' => 'required',
+            'password' => 'required|confirmed'
+        ]);
+        
+        if ($validator->fails()) { 
+            return response()->json(['errors'=>$validator->errors()], 401);            
+        }
+
+        $client = Client::where('email', $request->email)->first();
+
+        if($request->code == $client->code)
+        {
+            $client->update([
+                'password' => Hash::make($request->password),
+                'code' => null
+            ]);
+        }
+        else return response()->json(['error'=>'Wrong code'], 400);     
+
+        return $this->sendResponse([], 'Пароль успешно сменен');
+    }
     
 }
