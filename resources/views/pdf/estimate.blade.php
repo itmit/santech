@@ -10,8 +10,8 @@
                 <thead>
                   <tr>
                     <th style="text-align: center; width: 10%">№ п/п</th>
-                    <th style="text-align: center; width: 10%">Наименование</th>
-                    <th style="text-align: center">Кол-во</th>
+                    <th style="text-align: center;"">Наименование</th>
+                    <th style="text-align: center width: 10%">Кол-во</th>
                     {{-- <th style="text-align: right">Цена</th>
                     <th style="text-align: right">Итого</th> --}}
                   </tr>
