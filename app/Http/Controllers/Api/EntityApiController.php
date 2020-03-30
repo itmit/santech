@@ -290,8 +290,21 @@ class EntityApiController extends ApiBaseController
             }
         };
 
-        $estimate2 = $estimate;
+        $result = [];
 
-        return $this->sendResponse(array_intersect($estimate, $estimate2), "Estimate");
+        foreach ($estimate as $value) {
+            foreach ($estimate as $value2) {
+                if($value['uuid'] != $value2['uuid'])
+                {
+                    $result[$value['uuid']] = $value;
+                }
+                else
+                {
+                    $result[$value['uuid']]['count'] = $result[$value['uuid']]['count'] + $result[$value2['uuid']]['count'];
+                }
+            }
+        }
+
+        return $this->sendResponse($result, "Estimate");
     }
 }
