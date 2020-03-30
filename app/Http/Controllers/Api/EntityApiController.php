@@ -26,7 +26,7 @@ class EntityApiController extends ApiBaseController
 
     public function index()
     {
-        return $this->sendResponse(Entity::select('uuid', 'name')->where('client_id', auth('api')->user()->id)->get()->toArray(), 'Entity list');
+        return $this->sendResponse(Entity::select('uuid', 'name')->orderBy('created_at', 'desc')->where('client_id', auth('api')->user()->id)->get()->toArray(), 'Entity list');
     }
 
     public function store(Request $request)

@@ -4,14 +4,14 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-12">
-            <p style="text-align: center"><b>{{ $entity->name }}</b></p>
+            <p style="text-align: left"><b>{{ $entity->name }}</b></p>
             {{-- <h1>Наименование объекта</h1> --}}
             <table class="table-bordered" style="width: 100%;">
                 <thead>
                   <tr>
                     <th style="text-align: left">№ п/п</th>
                     <th style="text-align: left">Наименование</th>
-                    <th style="text-align: left">Кол-во</th>
+                    <th style="text-align: right">Кол-во</th>
                     {{-- <th style="text-align: right">Цена</th>
                     <th style="text-align: right">Итого</th> --}}
                   </tr>
