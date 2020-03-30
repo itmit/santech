@@ -1,7 +1,7 @@
 @extends('layouts.pdfApp')
 
 @section('content')
-<div class="container">
+<div class="container" style="width: 100%">
     {{-- <div class="row justify-content-center">
         <div class="col-md-12"> --}}
             <p style="text-align: left"><b>{{ $entity->name }}</b></p>
