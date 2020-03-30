@@ -295,6 +295,6 @@ class EntityApiController extends ApiBaseController
 
 
 
-        return $this->sendResponse($result, "Estimate");
+        return $this->sendResponse($estimate, "Estimate");
     }
 }
