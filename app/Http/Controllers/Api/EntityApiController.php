@@ -296,7 +296,7 @@ class EntityApiController extends ApiBaseController
                             'amount' => $items['amount'],
                             'price' => $items['count'] * $items['amount'],
                         ];
-                        isset($estimate);
+                        unset($estimate['uuid']);
                     break;
                     }
                 }
