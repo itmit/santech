@@ -1,7 +1,7 @@
 @extends('layouts.pdfApp')
 
 @section('content')
-<div class="container">
+<div class="container" style="max-width:95%!important">
     <div class="row justify-content-center">
         <div class="col-md-12">
             <p style="text-align: left"><b>Наименование объекта</b></p>
