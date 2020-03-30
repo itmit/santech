@@ -9,9 +9,9 @@
             <table class="table-bordered" style="width: 100%;">
                 <thead>
                   <tr>
-                    <th style="text-align: left">№ п/п</th>
-                    <th style="text-align: left">Наименование</th>
-                    <th style="text-align: right">Кол-во</th>
+                    <th style="text-align: center">№ п/п</th>
+                    <th style="text-align: center">Наименование</th>
+                    <th style="text-align: center">Кол-во</th>
                     {{-- <th style="text-align: right">Цена</th>
                     <th style="text-align: right">Итого</th> --}}
                   </tr>
