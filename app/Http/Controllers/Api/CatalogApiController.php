@@ -55,9 +55,20 @@ class CatalogApiController extends ApiBaseController
 
     public function getItem($uuid)
     {        
-
         if(!Item::where('uuid', $uuid)->exists()) return response()->json(['error'=>'Такой позиции не существует'], 400);            
         
         return $this->sendResponse(Item::select('id', 'uuid', 'name', 'photo')->where('uuid', $uuid)->first()->toArray(), 'Item');
+    }
+
+    public function search(Request $request)
+    {
+        $validator = Validator::make($data->all(), [
+            'name' => 'required|exists:items',
+        ]);
+
+        $items = Item::where('name', 'LIKE', "%$request->name%") // 
+            ->get(['uuid', 'name', 'photo'])->toArray();
+
+        return $this->sendResponse($items, 'Items');
     }
 }

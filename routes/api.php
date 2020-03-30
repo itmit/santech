@@ -26,6 +26,7 @@ Route::group(['middleware' => 'auth:api'], function(){
     Route::post('catalog/category', 'Api\CatalogApiController@getCategoriesByCatalog');
     Route::post('catalog/category/item', 'Api\CatalogApiController@getItemsByCategory');
     Route::get('catalog/category/item/{uuid}', 'Api\CatalogApiController@getItem');
+    Route::post('catalog/search', 'Api\CatalogApiController@search');
 
     Route::resource('entity', 'Api\EntityApiController');
     Route::get('entity/getEstimate/{uuid}', 'Api\EntityApiController@getEstimate');
