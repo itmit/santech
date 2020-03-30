@@ -6,7 +6,7 @@
         <div class="col-md-12">
             <p style="text-align: left"><b>{{ $entity->name }}</b></p>
             {{-- <h1>Наименование объекта</h1> --}}
-            <table class="table-bordered" style="width: 100%; border: 5px solid black;border-collapse: collapse;">
+            <table class="table-bordered" style="width: 100%;">
                 <thead>
                   <tr>
                     <th style="text-align: left">№ п/п</th>

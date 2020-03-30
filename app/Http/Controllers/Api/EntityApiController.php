@@ -245,6 +245,7 @@ class EntityApiController extends ApiBaseController
             $items = [];
             foreach ($node->getItems() as $item) {
                 $items = [
+                    'id' => $item->id,
                     'name' => $item->name,
                     'count' => $item->count,
                     'amount' => $item->amount,
@@ -278,6 +279,7 @@ class EntityApiController extends ApiBaseController
             $items = [];
             foreach ($node->getItems() as $item) {
                 $items = [
+                    'id' => $item->id,
                     'name' => $item->name,
                     'count' => $item->count,
                     'amount' => $item->amount,
@@ -287,6 +289,12 @@ class EntityApiController extends ApiBaseController
                 $estimate[] = $items;
             }
         };
+
+        foreach ($estimate as $key => $value) {
+            foreach ($estimate as $key2 => $value2) {
+            
+            }
+        }
 
         return $this->sendResponse($estimate, "Estimate");
     }
