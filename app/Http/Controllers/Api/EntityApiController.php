@@ -320,7 +320,15 @@ class EntityApiController extends ApiBaseController
             }
         };
 
-        natcasesort($estimate);
+        $tmp=array();
+        foreach($estimate as $item){
+                $tmp['uuid'][]=$item['uuid'];
+                $tmp['name'][]=$item['name'];
+                $tmp['count'][]=$item['count'];
+                $tmp['amount'][]=$item['amount'];
+                $tmp['price'][]=$item['price'];
+        }
+        array_multisort($tmp['conameunt'],SORT_ASC,$estimate);//,$tmp['sort'],SORT_DESC,$out);
 
         return $this->sendResponse($estimate, "Estimate");
     }
