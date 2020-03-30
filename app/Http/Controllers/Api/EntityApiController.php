@@ -290,7 +290,7 @@ class EntityApiController extends ApiBaseController
                 {
                     if($est['uuid'] == $items['uuid'])
                     {
-                        $est[$key] = [
+                        $estimate[$key] = [
                             'uuid' => $items['uuid'],
                             'name' => $items['name'],
                             'count' => $items['count'] + $est['count'],
@@ -298,7 +298,7 @@ class EntityApiController extends ApiBaseController
                             'price' => $items['count'] * $items['amount'],
                         ];
                         $f = 1;
-                        return $this->sendResponse($est[$key], "Estimate");
+                        // return $this->sendResponse($est[$key], "Estimate");
                         break;
                     }
                 }
