@@ -7,7 +7,7 @@
             <p style="text-align: left"><b>Наименование объекта</b></p>
             {{-- <h1>Наименование объекта</h1> --}}
             <div class="table-responsive">
-                <table class="table-bordered" style="width: 100%; border: 2px solid black;border-collapse: collapse;">
+                <table class="table-bordered" style="width: 100%;">
                     <thead>
                     <tr>
                         <th style="text-align: left">№ п/п</th>
@@ -39,4 +39,15 @@
         </div>
     </div>
 </div>
+
+<style>
+    th
+    {
+        border: 2px
+    }
+    table
+    {
+        border: 2px
+    }
+</style>
 @endsection
