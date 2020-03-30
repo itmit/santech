@@ -47,7 +47,7 @@ class EntityApiController extends ApiBaseController
                     'client_id' => auth('api')->user()->id,
                     'name' => $request->name
                 ]);
-                if(!empty($request->data))
+                if(!empty($request->data) || count($request->data) > 0)
                 {
                     foreach ($request->data as $node) {
                     $nodeObj = Node::create([
