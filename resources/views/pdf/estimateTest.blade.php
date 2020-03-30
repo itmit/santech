@@ -4,7 +4,7 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-12">
-            <p style="text-align: left"><b>{{ $entity->name }}</b></p>
+            <p style="text-align: left"><b>Наименование объекта</b></p>
             {{-- <h1>Наименование объекта</h1> --}}
             <table class="table-bordered" style="width: 100%; border: 5px solid black;border-collapse: collapse;">
                 <thead>
@@ -17,24 +17,21 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <?php $i=1?>
-                  @foreach($estimate as $item)
                     <tr>
-                      <td style="text-align: right">{{ $i }}</td>
-                      <td style="text-align: left">{{ $item['name'] }}</td>
-                      <td style="text-align: right">{{ $item['count'] }}</td>
-                      {{-- <td style="text-align: right">{{ $item['amount'] }}</td>
-                      <td style="text-align: right">{{ $item['price'] }}</td> --}}
+                      <td style="text-align: right">1</td>
+                      <td style="text-align: left">Штука 1</td>
+                      <td style="text-align: right">5</td>
                     </tr>
-                    <?php $i++?>
-                  @endforeach
-                  {{-- <tr>
-                    <td style="text-align: left"><b>Итого</b></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td style="text-align: left">{{ $total }}</td>
-                  </tr> --}}
+                    <tr>
+                        <td style="text-align: right">2</td>
+                        <td style="text-align: left">Штука 2</td>
+                        <td style="text-align: right">10</td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: right">3</td>
+                        <td style="text-align: left">Штука 3</td>
+                        <td style="text-align: right">15/td>
+                    </tr>
                 </tbody>     
             </table>         
         </div>
