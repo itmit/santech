@@ -2,8 +2,8 @@
 
 @section('content')
 <div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-12">
+    {{-- <div class="row justify-content-center">
+        <div class="col-md-12"> --}}
             <p style="text-align: left"><b>{{ $entity->name }}</b></p>
             {{-- <h1>Наименование объекта</h1> --}}
             <table class="table-bordered" style="width: 100%;">
@@ -37,7 +37,7 @@
                   </tr> --}}
                 </tbody>     
             </table>         
-        </div>
-    </div>
+        {{-- </div>
+    </div> --}}
 </div>
 @endsection
