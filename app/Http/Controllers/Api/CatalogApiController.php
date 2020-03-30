@@ -22,7 +22,7 @@ class CatalogApiController extends ApiBaseController
 
     public function index()
     {
-        return $this->sendResponse(Catalog::select('uuid', 'name', 'photo')->get()->toArray(), 'Catalog list');
+        return $this->sendResponse(Catalog::select('uuid', 'name', 'photo')->orderBy('name')->get()->toArray(), 'Catalog list');
     }
 
     public function getCategoriesByCatalog(Request $request)
