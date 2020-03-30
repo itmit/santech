@@ -271,6 +271,16 @@ class EntityApiController extends ApiBaseController
             }
         };
 
+        $tmp=array();
+        foreach($estimate as $item){
+                $tmp['uuid'][]=$item['uuid'];
+                $tmp['name'][]=$item['name'];
+                $tmp['count'][]=$item['count'];
+                $tmp['amount'][]=$item['amount'];
+                $tmp['price'][]=$item['price'];
+        }
+        array_multisort($tmp['name'],SORT_ASC,$estimate);//,$tmp['sort'],SORT_DESC,$out);
+
         $pdf = PDF::loadView('pdf.estimate', ['estimate' => $estimate, 'entity' => $entity, 'total' => $total]);
     
         $pdf->save(storage_path().'/app/public/estimate/'.$uuid.'.pdf');
