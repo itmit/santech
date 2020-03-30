@@ -285,15 +285,13 @@ class EntityApiController extends ApiBaseController
                     'amount' => $item->amount,
                     'price' => $item->count * $item->amount,
                 ];
-                if(in_array($items['uuid'], $estimate)) continue;
-                $total = $total + $item->count * $item->amount;
+                foreach($estimate as $est)
+                {
+                    if($est['uuid'] == $items['uuid']) continue 2;
+                }
                 $estimate[] = $items;
             }
         };
-
-        $result = [];
-
-
 
         return $this->sendResponse($estimate, "Estimate");
     }
