@@ -19,9 +19,9 @@
                     </thead>
                     <tbody>
                         <tr>
-                        <td style="text-align: right">1</td>
-                        <td style="text-align: left">Штука 1</td>
-                        <td style="text-align: right">5</td>
+                            <td style="text-align: right">1</td>
+                            <td style="text-align: left">Штука 1</td>
+                            <td style="text-align: right">5</td>
                         </tr>
                         <tr>
                             <td style="text-align: right">2</td>
@@ -41,7 +41,7 @@
 </div>
 
 <style>
-    th
+    th, td
     {
         border: 2px
     }
