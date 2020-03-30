@@ -40,14 +40,4 @@
     </div>
 </div>
 
-<style>
-    th, td
-    {
-        border: 2px
-    }
-    table
-    {
-        border: 2px
-    }
-</style>
 @endsection
