@@ -40,8 +40,6 @@ class EntityApiController extends ApiBaseController
             return response()->json(['errors'=>$validator->errors()], 400);            
         }
 
-        return count($request->data);
-
         try {
             DB::transaction(function () use ($request) {
                 $this->obj = Entity::create([
