@@ -103,7 +103,7 @@ class EntityApiController extends ApiBaseController
     {
         $entity = Entity::where('uuid', $uuid)->first();
 
-        $nodes = Node::where('entity_id', $entity->id)->get();
+        $nodes = Node::where('entity_id', $entity->id)->orderBy('created_at', 'desc')->get();
 
         $result = [];
 
