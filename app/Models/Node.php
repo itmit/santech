@@ -21,7 +21,7 @@ class Node extends Model
         return $this->hasMany(NodeItem::class, 'node_id')
         ->join('items', 'node_items.item_id', '=', 'items.id')
         ->select('items.uuid', 'items.name', 'node_items.count', 'node_items.amount', 'node_items.description')
-        ->orderBy('items.name', 'asc')
+        ->orderBy('items.name', 'desc')
         ->get();
     }
 }

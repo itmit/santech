@@ -320,6 +320,8 @@ class EntityApiController extends ApiBaseController
             }
         };
 
+        natcasesort($estimate);
+
         return $this->sendResponse($estimate, "Estimate");
     }
 }
