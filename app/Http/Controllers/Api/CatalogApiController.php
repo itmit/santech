@@ -62,7 +62,7 @@ class CatalogApiController extends ApiBaseController
 
     public function search(Request $request)
     {
-        $validator = Validator::make($data->all(), [
+        $validator = Validator::make($request->all(), [
             'name' => 'required',
         ]);
 
