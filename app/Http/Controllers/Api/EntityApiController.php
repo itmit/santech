@@ -286,11 +286,11 @@ class EntityApiController extends ApiBaseController
                     'amount' => $item->amount,
                     'price' => $item->count * $item->amount,
                 ];
-                foreach($estimate as $est)
+                foreach($estimate as $key => $est)
                 {
                     if($est['uuid'] == $items['uuid'])
                     {
-                        $est[] = [
+                        $est[$key] = [
                             'uuid' => $items['uuid'],
                             'name' => $items['name'],
                             'count' => $items['count'] + $est['count'],
