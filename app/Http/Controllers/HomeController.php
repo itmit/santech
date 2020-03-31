@@ -28,7 +28,7 @@ class HomeController extends Controller
     {
         return view('home',
         [
-            'catalogs' => Catalog::get(),
+            'catalogs' => Catalog::orderBy('name')->get(),
         ]);
     }
 }
