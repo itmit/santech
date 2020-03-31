@@ -28,3 +28,5 @@ Route::post('catalog/getCategories', 'Web\CatalogController@getCategories')->nam
 Route::post('catalog/getItems', 'Web\CatalogController@getItems')->name('getItems');
 Route::post('catalog/deleteCatalog', 'Web\CatalogController@deleteCatalog')->name('deleteCatalog');
 Route::post('catalog/renameCatalog', 'Web\CatalogController@renameCatalog')->name('renameCatalog');
+Route::post('catalog/deleteCategory', 'Web\CatalogController@deleteCategory')->name('deleteCategory');
+Route::post('catalog/renameCategory', 'Web\CatalogController@renameCategory')->name('renameCategory');

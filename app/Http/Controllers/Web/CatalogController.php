@@ -269,12 +269,30 @@ class CatalogController extends Controller
 
     public function deleteCategory(Request $request)
     {
-
+        $category = Category::where('id', $request->category)->first();
+        $items = Item::where('category_id', $category->id)->get();
+        foreach ($items as $item) {
+            $nodeitems = NodeItem::where('item_id', $item->id)->get();
+            foreach ($nodeitems as $nodeitem) {
+                $nodeitem->delete();
+            }
+            $item->delete();
+        };
+        $category->delete();
+        return response()->json('Deleted', 200);
     }
 
     public function renameCatalog(Request $request)
     {
         $catalog = Catalog::where('id', $request->catalog)->update([
+            'name' => $request->name
+        ]);
+        return response()->json('Renamed', 200);
+    }
+
+    public function renameCategory(Request $request)
+    {
+        $category = Category::where('id', $request->catalog)->update([
             'name' => $request->name
         ]);
         return response()->json('Renamed', 200);

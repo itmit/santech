@@ -170,7 +170,20 @@
             let isDelete = confirm("Удалить категорию? При удалении будут удалены все материалы!");
             if(isDelete)
             {
-                
+                let category = $('select[name="js-category"]').children("option:selected").val();
+                $.ajax({
+                    headers : {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+                    dataType: "json",
+                    url     : 'catalog/deleteCategory',
+                    data    : {category: category},
+                    method    : 'post',
+                    success: function (response) {
+                        location.reload();
+                    },
+                    error: function (xhr, err) { 
+                        console.log("Error: " + xhr + " " + err);
+                    }
+                });
             }
         })
 
