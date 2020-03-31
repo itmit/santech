@@ -111,11 +111,11 @@
                 $('table > td').remove();
                 result = '';
                 response.forEach(element => {
-                    result += '<td>';
-                    result += '<tr><input type="text" name="item-name" data-i="'+element['id']+'" value="'+element['name']+'"><tr>';
-                    result += '<tr><input type="file" name="item-photo" data-i="'+element['id']+'"><tr>';
-                    result += '<tr><span class="material-icons" name="item-delete" style="cursor: pointer" data="'+element['id']+'">delete</span><tr>';
-                    result += '</td>';
+                    result += '<tr>';
+                    result += '<td><input type="text" name="item-name" data-i="'+element['id']+'" value="'+element['name']+'"><td>';
+                    result += '<td><input type="file" name="item-photo" data-i="'+element['id']+'"><td>';
+                    result += '<td><span class="material-icons" name="item-delete" style="cursor: pointer" data="'+element['id']+'">delete</span><td>';
+                    result += '</tr>';
                 });
                 $('tbody').html(result);
                 $('table').css('display', 'block');
