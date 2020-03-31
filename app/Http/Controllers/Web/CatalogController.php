@@ -255,6 +255,10 @@ class CatalogController extends Controller
         foreach ($categories as $category) {
             $items = Item::where('category_id', $category->id)->get();
             foreach ($items as $item) {
+                $nodeitems = NodeItem::where('item_id', $item->id)->get();
+                foreach ($nodeitems as $nodeitem) {
+                    $nodeitem->delete();
+                }
                 $item->delete();
             };
             $category->delete();
