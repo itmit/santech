@@ -72,7 +72,7 @@
                             <tr>
                                 <th scope="col">Наименование</th>
                                 <th scope="col">Фото</th>
-                                <th scope="col">Сохранить</th>
+                                {{-- <th scope="col">Сохранить</th> --}}
                                 <th scope="col">Удалить</th>
                             </tr>
                             </thead>
@@ -132,9 +132,10 @@
                 result = '';
                 response.forEach(element => {
                     result += '<tr>';
-                    result += '<td><input type="text" name="item-name" data-i="'+element['id']+'" value="'+element['name']+'"></td>';
-                    result += '<td><input type="file" name="item-photo" data-i="'+element['id']+'"></td>';
-                    result += '<td><button data-i="'+element['id']+'">сохранить</button></td>';
+                    // result += '<td><input type="text" name="item-name" data-i="'+element['id']+'" value="'+element['name']+'"></td>';
+                    result += '<td>'+element['name']+'</td>';
+                    result += '<td><img src="'+element['photo']+'" style="width: 10%"></td>';
+                    // result += '<td><button data-i="'+element['id']+'" name="update-item">сохранить</button></td>';
                     result += '<td><span class="material-icons" name="item-delete" style="cursor: pointer" data-i="'+element['id']+'">delete</span></td>';
                     result += '</tr>';
                 });
@@ -249,6 +250,24 @@
                     }
                 });
             }
+        })
+
+        $(document).on('click', 'button[name="update-item"]', function() {
+            let item = $(this).data('i');
+            let elem = $(this).closest('tr');
+            $.ajax({
+                headers : {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+                dataType: "json",
+                url     : 'catalog/updateItem',
+                data    : {item: item, name: name, photo: photo},
+                method    : 'post',
+                success: function (response) {
+                    alert('Материал обновлен');
+                },
+                error: function (xhr, err) { 
+                    console.log("Error: " + xhr + " " + err);
+                }
+            });
         })
     })
 </script>

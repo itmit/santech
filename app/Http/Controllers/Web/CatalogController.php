@@ -308,4 +308,15 @@ class CatalogController extends Controller
         $item->delete();
         return response()->json('Deleted', 200);
     }
+
+    public function updateItem(Request $request)
+    {
+        $item = Item::where('id', $request->item)->first();
+        $nodeitems = NodeItem::where('item_id', $item->id)->get();
+        foreach ($nodeitems as $nodeitem) {
+            $nodeitem->delete();
+        }
+        $item->delete();
+        return response()->json('Deleted', 200);
+    }
 }
