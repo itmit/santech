@@ -40,13 +40,12 @@
                             </button>
                         </div>
                     </form>
-                    <ul class="nav nav-tabs">
+                    <select name="" id="">
+                        <option value="" selected disabled>Выберите каталог</option>
                         @foreach ($catalogs as $catalog)
-                        <li>
-                            <a data-toggle="tab" href="#c{{$catalog->id}}">{{$catalog->name}}</a>
-                        </li>
+                        <option value="{{$catalog->id}}">{{$catalog->name}}</option>
                         @endforeach
-                    </ul>
+                    </select>
                 </div>
             </div>
         </div>
