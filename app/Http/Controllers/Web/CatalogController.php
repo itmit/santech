@@ -170,7 +170,7 @@ class CatalogController extends Controller
                     }
                     else $category = Category::where('name', $item['A'])->where('catalog_id', $catalog->id)->first();
 
-                    $categories[] = $category;
+                    $categories[] = $category->uuid;
 
                     if(!Item::where('name', '=', $item['C'])->where('category_id', $category->id)->exists())
                     {
