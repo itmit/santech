@@ -239,6 +239,6 @@ class CatalogController extends Controller
     public function getCategories(Request $request)
     {
         $categories = Category::where('catalog_id', $request->catalog)->get();
-        return response()->json($susliks, 200);
+        return response()->json($categories, 200);
     }
 }

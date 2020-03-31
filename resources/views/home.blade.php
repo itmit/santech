@@ -47,7 +47,7 @@
                             <option value="{{$catalog->id}}">{{$catalog->name}}</option>
                         @endforeach
                     </select>
-                    <button>Удалить каталог</button>
+                    <button name="js-catalog-delete" disabled>Удалить каталог</button>
                     <br>
                     <select name="js-category" id="js-category" disabled>
                         <option value="" selected disabled>Выберите категорию</option>
