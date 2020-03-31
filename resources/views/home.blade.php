@@ -56,7 +56,7 @@
                         <option value="" selected disabled>Выберите категорию</option>
                     </select>
                     <button name="js-category-delete" disabled>Удалить категорию</button>
-                    <input type="text" name="js-catalog-name" value="" disabled>
+                    <input type="text" name="js-category-name" value="" disabled>
                     <button name="js-category-rename" disabled>Переименовать категорию</button>
                     <br>
 
@@ -111,6 +111,7 @@
 
         $(document).on('change', 'select[name="js-category"]', function() {
             let category = $(this).children("option:selected").val();
+            let text = $(this).children("option:selected").text();
             $.ajax({
             headers : {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
             dataType: "json",
@@ -128,6 +129,9 @@
                     result += '</tr>';
                 });
                 $('button[name="js-category-delete"]').removeAttr("disabled");
+                $('button[name="js-category-rename"]').removeAttr("disabled");
+                $('input[name="js-category-name"]').removeAttr("disabled");
+                $('input[name="js-category-name"]').val(text);
                 $('tbody').html(result);
                 $('table').css('display', 'block');
             },
