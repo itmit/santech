@@ -117,9 +117,7 @@
                     result += '<tr><span class="material-icons" name="item-delete" style="cursor: pointer" data="'+element['id']+'">delete</span><tr>';
                     result += '</th>';
                 });
-                $('select[name="js-category"]').removeAttr("disabled");
-                $('button[name="js-catalog-delete"]').removeAttr("disabled");
-                $('select[name="js-category').html(result);
+                $('tbody').html(result);
             },
             error: function (xhr, err) { 
                 console.log("Error: " + xhr + " " + err);
