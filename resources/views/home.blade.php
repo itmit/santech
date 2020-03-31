@@ -52,6 +52,8 @@
                     <select name="js-category" id="js-category" disabled>
                         <option value="" selected disabled>Выберите категорию</option>
                     </select>
+                    <button name="js-category-delete" disabled>Удалить категорию</button>
+                    <br>
                 </div>
             </div>
         </div>
