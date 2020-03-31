@@ -66,9 +66,9 @@ class CatalogApiController extends ApiBaseController
             'name' => 'required',
         ]);
 
-        $items = Item::where('name', 'LIKE', "%$request->name%") // 
+        $categories = Category::where('name', 'LIKE', "%$request->name%") // 
             ->get(['uuid', 'name', 'photo'])->toArray();
 
-        return $this->sendResponse($items, 'Items');
+        return $this->sendResponse($categories, 'Categories');
     }
 }
