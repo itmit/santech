@@ -204,6 +204,24 @@
                 }
             });
         })
+
+        $(document).on('click', 'button[name="js-category-rename"]', function() {
+            let category = $('select[name="js-category"]').children("option:selected").val();
+            let name = $('input[name="js-category-name"]').val();
+            $.ajax({
+                headers : {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+                dataType: "json",
+                url     : 'catalog/renameCategory',
+                data    : {category: category, name: name},
+                method    : 'post',
+                success: function (response) {
+                    location.reload();
+                },
+                error: function (xhr, err) { 
+                    console.log("Error: " + xhr + " " + err);
+                }
+            });
+        })
     })
 </script>
 

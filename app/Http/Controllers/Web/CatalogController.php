@@ -292,7 +292,7 @@ class CatalogController extends Controller
 
     public function renameCategory(Request $request)
     {
-        $category = Category::where('id', $request->catalog)->update([
+        $category = Category::where('id', $request->category)->update([
             'name' => $request->name
         ]);
         return response()->json('Renamed', 200);
