@@ -153,7 +153,9 @@ class CatalogController extends Controller
                     }
                     $result[$row] = $position;
                     $position = [];
-                }   
+                }
+
+                $categories = [];
                 
                 foreach($result as $item)
                 {
@@ -167,6 +169,8 @@ class CatalogController extends Controller
                         ]);
                     }
                     else $category = Category::where('name', $item['A'])->where('catalog_id', $catalog->id)->first();
+
+                    $categories[] = $category;
 
                     if(!Item::where('name', '=', $item['C'])->where('category_id', $category->id)->exists())
                     {
@@ -228,6 +232,6 @@ class CatalogController extends Controller
                 }
             }
         }
-        return true;
+        return $categories;
     }
 }
