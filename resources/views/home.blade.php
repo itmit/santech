@@ -55,7 +55,7 @@
                     <button name="js-category-delete" disabled>Удалить категорию</button>
                     <br>
                     <table class="table-bordered" style="display: none; width: 100%">
-                        <thead>
+                        <thead style="width: 100%">
                         <tr>
                             <th scope="col">Наименование</th>
                             <th scope="col">Фото</th>
@@ -111,13 +111,12 @@
                 $('table > td').remove();
                 result = '';
                 response.forEach(element => {
-                    result += '<th>';
+                    result += '<td>';
                     result += '<tr><input type="text" name="item-name" data-i="'+element['id']+'" value="'+element['name']+'"><tr>';
                     result += '<tr><input type="file" name="item-photo" data-i="'+element['id']+'"><tr>';
                     result += '<tr><span class="material-icons" name="item-delete" style="cursor: pointer" data="'+element['id']+'">delete</span><tr>';
-                    result += '</th>';
+                    result += '</td>';
                 });
-                console.log(result);
                 $('tbody').html(result);
                 $('table').css('display', 'block');
             },
