@@ -41,23 +41,29 @@
                         </div>
                     </form>
                     <hr>
-                    <select name="js-catalog" id="js-catalog">
-                        <option value="" selected disabled>Выберите каталог</option>
-                        @foreach ($catalogs as $catalog)
-                            <option value="{{$catalog->id}}">{{$catalog->name}}</option>
-                        @endforeach
-                    </select>
-                    <button name="js-catalog-delete" disabled>Удалить каталог</button>
-                    <input type="text" name="js-catalog-name" value="" disabled>
-                    <button name="js-catalog-rename" disabled>Переименовать каталог</button>
+                    <div class="row">
+                        <select name="js-catalog" id="js-catalog">
+                            <option value="" selected disabled>Выберите каталог</option>
+                            @foreach ($catalogs as $catalog)
+                                <option value="{{$catalog->id}}">{{$catalog->name}}</option>
+                            @endforeach
+                        </select>
+                        <button name="js-catalog-delete" disabled>Удалить каталог</button>
+                        <input type="text" name="js-catalog-name" value="" disabled>
+                        <button name="js-catalog-rename" disabled>Переименовать каталог</button>
+                    </div>
+                    
                     <br>
 
-                    <select name="js-category" id="js-category" disabled>
-                        <option value="" selected disabled>Выберите категорию</option>
-                    </select>
-                    <button name="js-category-delete" disabled>Удалить категорию</button>
-                    <input type="text" name="js-category-name" value="" disabled>
-                    <button name="js-category-rename" disabled>Переименовать категорию</button>
+                    <div class="row">
+                        <select name="js-category" id="js-category" disabled>
+                            <option value="" selected disabled>Выберите категорию</option>
+                        </select>
+                        <button name="js-category-delete" disabled>Удалить категорию</button>
+                        <input type="text" name="js-category-name" value="" disabled>
+                        <button name="js-category-rename" disabled>Переименовать категорию</button>
+                    </div>
+                    
                     <br>
 
                     <div class="d-lg-table-row">
