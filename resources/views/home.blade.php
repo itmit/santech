@@ -51,6 +51,7 @@
                     <input type="text" name="js-catalog-name" value="" disabled>
                     <button name="js-catalog-rename" disabled>Переименовать каталог</button>
                     <br>
+
                     <select name="js-category" id="js-category" disabled>
                         <option value="" selected disabled>Выберите категорию</option>
                     </select>
@@ -58,6 +59,7 @@
                     <input type="text" name="js-catalog-name" value="" disabled>
                     <button name="js-category-rename" disabled>Переименовать категорию</button>
                     <br>
+
                     <table class="table-bordered" style="display: none; width: 100%">
                         <thead style="width: 100%">
                         <tr>
@@ -96,7 +98,8 @@
                 $('select[name="js-category"]').removeAttr("disabled");
                 $('button[name="js-catalog-delete"]').removeAttr("disabled");
                 $('button[name="js-catalog-rename"]').removeAttr("disabled");
-                $('button[name="js-catalog-rename"]').val($(this).children("option:selected"));
+                $('input[name="js-catalog-name"]').removeAttr("disabled");
+                $('input[name="js-catalog-name"]').val($(this).children("option:selected").html());
                 $('select[name="js-category').html(result);
             },
             error: function (xhr, err) { 
