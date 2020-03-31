@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-8">
+        <div class="col-md-10">
             <div class="card">
                 <div class="card-header">Dashboard</div>
 
@@ -48,7 +48,7 @@
                         @endforeach
                     </select>
                     <select name="js-category" id="js-category" disabled>
-                        <option value="" selected disabled>Выберите каталог</option>
+                        <option value="" selected disabled>Выберите категорию</option>
                         {{-- @foreach ($catalogs as $catalog)
                             <option value="{{$catalog->id}}">{{$catalog->name}}</option>
                         @endforeach --}}
