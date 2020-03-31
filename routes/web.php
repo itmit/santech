@@ -27,3 +27,4 @@ Route::post('/uploadcatalog', 'Web\CatalogController@uploadCatalog')->name('uplo
 Route::post('catalog/getCategories', 'Web\CatalogController@getCategories')->name('getCategories');
 Route::post('catalog/getItems', 'Web\CatalogController@getItems')->name('getItems');
 Route::post('catalog/deleteCatalog', 'Web\CatalogController@deleteCatalog')->name('deleteCatalog');
+Route::post('catalog/renameCatalog', 'Web\CatalogController@renameCatalog')->name('renameCatalog');

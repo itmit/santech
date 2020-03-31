@@ -173,6 +173,24 @@
                 
             }
         })
+
+        $(document).on('click', 'button[name="js-catalog-rename"]', function() {
+            let catalog = $('select[name="js-catalog"]').children("option:selected").val();
+            let name = $('input[name="js-catalog-name"]').val();
+            $.ajax({
+                headers : {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+                dataType: "json",
+                url     : 'catalog/renameCatalog',
+                data    : {catalog: catalog, name: name},
+                method    : 'post',
+                success: function (response) {
+                    location.reload();
+                },
+                error: function (xhr, err) { 
+                    console.log("Error: " + xhr + " " + err);
+                }
+            });
+        })
     })
 </script>
 
