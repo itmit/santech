@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-10">
             <div class="card">
-                <div class="card-header">Dashboard</div>
+                <div class="card-header">Панель управления</div>
 
                 <div class="card-body">
                     @if (session('status'))
@@ -81,6 +81,7 @@
     $(document).ready(function() {
         $(document).on('change', 'select[name="js-catalog"]', function() {
             let catalog = $(this).children("option:selected").val();
+            let text = $(this).children("option:selected").text();
             $.ajax({
             headers : {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
             dataType: "json",
@@ -99,7 +100,7 @@
                 $('button[name="js-catalog-delete"]').removeAttr("disabled");
                 $('button[name="js-catalog-rename"]').removeAttr("disabled");
                 $('input[name="js-catalog-name"]').removeAttr("disabled");
-                $('input[name="js-catalog-name"]').val($(this).children("option:selected").html());
+                $('input[name="js-catalog-name"]').val(text);
                 $('select[name="js-category').html(result);
             },
             error: function (xhr, err) { 
