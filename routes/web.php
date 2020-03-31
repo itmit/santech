@@ -24,3 +24,4 @@ Route::get('/estimate', function () {
 });
 
 Route::post('/uploadcatalog', 'Web\CatalogController@uploadCatalog')->name('uploadCatalog');
+Route::post('catalog/getCategories', 'Web\CatalogController@getCategories')->name('getCategories');

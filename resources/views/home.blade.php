@@ -47,11 +47,10 @@
                             <option value="{{$catalog->id}}">{{$catalog->name}}</option>
                         @endforeach
                     </select>
+                    <button>Удалить каталог</button>
+                    <br>
                     <select name="js-category" id="js-category" disabled>
                         <option value="" selected disabled>Выберите категорию</option>
-                        {{-- @foreach ($catalogs as $catalog)
-                            <option value="{{$catalog->id}}">{{$catalog->name}}</option>
-                        @endforeach --}}
                     </select>
                 </div>
             </div>
@@ -63,6 +62,27 @@
     $(document).ready(function() {
         $(document).on('change', 'select[name="js-catalog"]', function() {
             $('select[name="js-category"]').removeAttr("disabled");
+            let catalog = $(this).children("option:selected").val();
+            $.ajax({
+            headers : {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+            dataType: "json",
+            url     : 'catalog/getCategories',
+            data    : {catalog: catalog},
+            method    : 'post',
+            success: function (response) {
+                $('select[name="js-category"] > option').remove();
+                result = '<option value="" selected disabled>Выберите категорию</option>';
+                response.forEach(element => {
+                    result += '<option value='+element['id']+'>';
+                    result += element['name'];
+                    result += '</option>';
+                });
+                $('select[name="js-category').html(result);
+            },
+            error: function (xhr, err) { 
+                console.log("Error: " + xhr + " " + err);
+            }
+        });
         })
     })
 </script>

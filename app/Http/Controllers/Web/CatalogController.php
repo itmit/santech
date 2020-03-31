@@ -232,6 +232,13 @@ class CatalogController extends Controller
                 }
             }
         }
-        return $categories;
+        // return $categories;
+        return true;
+    }
+
+    public function getCategories(Request $request)
+    {
+        $categories = Category::where('catalog_id', $request->catalog)->get();
+        return response()->json($susliks, 200);
     }
 }
