@@ -118,6 +118,7 @@
                     result += '</th>';
                 });
                 $('tbody').html(result);
+                $('table').css('display', 'block');
             },
             error: function (xhr, err) { 
                 console.log("Error: " + xhr + " " + err);
