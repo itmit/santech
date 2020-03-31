@@ -112,11 +112,12 @@
                 result = '';
                 response.forEach(element => {
                     result += '<tr>';
-                    result += '<td><input type="text" name="item-name" data-i="'+element['id']+'" value="'+element['name']+'"><td>';
-                    result += '<td><input type="file" name="item-photo" data-i="'+element['id']+'"><td>';
-                    result += '<td><span class="material-icons" name="item-delete" style="cursor: pointer" data="'+element['id']+'">delete</span><td>';
+                    result += '<td><input type="text" name="item-name" data-i="'+element['id']+'" value="'+element['name']+'"></td>';
+                    result += '<td><input type="file" name="item-photo" data-i="'+element['id']+'"></td>';
+                    result += '<td><span class="material-icons" name="item-delete" style="cursor: pointer" data="'+element['id']+'">delete</span></td>';
                     result += '</tr>';
                 });
+                $('button[name="js-category-delete"]').removeAttr("disabled");
                 $('tbody').html(result);
                 $('table').css('display', 'block');
             },
