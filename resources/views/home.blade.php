@@ -54,7 +54,7 @@
                     </select>
                     <button name="js-category-delete" disabled>Удалить категорию</button>
                     <br>
-                    <table class="table-bordered" style="display: none">
+                    <table class="table-bordered" style="display: none; width: 100%">
                         <thead>
                         <tr>
                             <th scope="col">Наименование</th>
@@ -117,6 +117,7 @@
                     result += '<tr><span class="material-icons" name="item-delete" style="cursor: pointer" data="'+element['id']+'">delete</span><tr>';
                     result += '</th>';
                 });
+                console.log(result);
                 $('tbody').html(result);
                 $('table').css('display', 'block');
             },
