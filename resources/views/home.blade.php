@@ -60,17 +60,20 @@
                     <button name="js-category-rename" disabled>Переименовать категорию</button>
                     <br>
 
-                    <table class="table-bordered" style="display: none; width: 100%">
-                        <thead style="width: 100%">
-                        <tr>
-                            <th scope="col">Наименование</th>
-                            <th scope="col">Фото</th>
-                            <th scope="col">Удалить</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        </tbody>
-                    </table>
+                    <div class="d-lg-table-row">
+                        <table class="table-bordered" style="display: none; width: 100%">
+                            <thead style="width: 100%">
+                            <tr>
+                                <th scope="col">Наименование</th>
+                                <th scope="col">Фото</th>
+                                <th scope="col">Сохранить</th>
+                                <th scope="col">Удалить</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div> 
                 </div>
             </div>
         </div>
@@ -125,6 +128,7 @@
                     result += '<tr>';
                     result += '<td><input type="text" name="item-name" data-i="'+element['id']+'" value="'+element['name']+'"></td>';
                     result += '<td><input type="file" name="item-photo" data-i="'+element['id']+'"></td>';
+                    result += '<td><button data-i="'+element['id']+'">сохранить</button></td>';
                     result += '<td><span class="material-icons" name="item-delete" style="cursor: pointer" data="'+element['id']+'">delete</span></td>';
                     result += '</tr>';
                 });
@@ -145,7 +149,20 @@
             let isDelete = confirm("Удалить каталог? При удалении будут удалены все категории и материалы!");
             if(isDelete)
             {
-
+                let catalog = $('select[name="js-catalog"]').children("option:selected").val();
+                $.ajax({
+                    headers : {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+                    dataType: "json",
+                    url     : 'catalog/deleteCatalog',
+                    data    : {catalog: catalog},
+                    method    : 'post',
+                    success: function (response) {
+                        location.reload();
+                    },
+                    error: function (xhr, err) { 
+                        console.log("Error: " + xhr + " " + err);
+                    }
+                });
             }
         })
 

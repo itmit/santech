@@ -247,4 +247,24 @@ class CatalogController extends Controller
         $items = Item::where('category_id', $request->category)->get();
         return response()->json($items, 200);
     }
+
+    public function deleteCatalog(Request $request)
+    {
+        $catalog = Catalog::where('id', $request->catalog)->first();
+        $categories = Category::where('catalog_id', $catalog->id)->get();
+        foreach ($categories as $category) {
+            $items = Item::where('category_id', $category->id)->get();
+            foreach ($items as $item) {
+                $item->delete();
+            };
+            $category->delete();
+        }
+        $catalog->delete();
+        return response()->json('Deleted', 200);
+    }
+
+    public function deleteCategory(Request $request)
+    {
+
+    }
 }
