@@ -63,7 +63,6 @@
 <script>
     $(document).ready(function() {
         $(document).on('change', 'select[name="js-catalog"]', function() {
-            $('select[name="js-category"]').removeAttr("disabled");
             let catalog = $(this).children("option:selected").val();
             $.ajax({
             headers : {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
@@ -79,12 +78,30 @@
                     result += element['name'];
                     result += '</option>';
                 });
+                $('select[name="js-category"]').removeAttr("disabled");
+                $('button[name="js-catalog-delete"]').removeAttr("disabled");
                 $('select[name="js-category').html(result);
             },
             error: function (xhr, err) { 
                 console.log("Error: " + xhr + " " + err);
             }
         });
+        })
+
+        $(document).on('click', 'button[name="js-catalog-delete"]', function() {
+            let isDelete = confirm("Удалить каталог? При удалении будут удалены все категории и материалы!");
+            if(isDelete)
+            {
+
+            }
+        })
+
+        $(document).on('click', 'button[name="js-category-delete"]', function() {
+            let isDelete = confirm("Удалить категорию? При удалении будут удалены все материалы!");
+            if(isDelete)
+            {
+                
+            }
         })
     })
 </script>
