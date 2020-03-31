@@ -54,6 +54,17 @@
                     </select>
                     <button name="js-category-delete" disabled>Удалить категорию</button>
                     <br>
+                    <table class="table-bordered" style="display: none">
+                        <thead>
+                        <tr>
+                            <th scope="col">Наименование</th>
+                            <th scope="col">Фото</th>
+                            <th scope="col">Удалить</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
@@ -77,6 +88,34 @@
                     result += '<option value='+element['id']+'>';
                     result += element['name'];
                     result += '</option>';
+                });
+                $('select[name="js-category"]').removeAttr("disabled");
+                $('button[name="js-catalog-delete"]').removeAttr("disabled");
+                $('select[name="js-category').html(result);
+            },
+            error: function (xhr, err) { 
+                console.log("Error: " + xhr + " " + err);
+            }
+        });
+        })
+
+        $(document).on('change', 'select[name="js-category"]', function() {
+            let category = $(this).children("option:selected").val();
+            $.ajax({
+            headers : {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+            dataType: "json",
+            url     : 'catalog/getItems',
+            data    : {category: category},
+            method    : 'post',
+            success: function (response) {
+                $('table > td').remove();
+                result = '';
+                response.forEach(element => {
+                    result += '<th>';
+                    result += '<tr><input type="text" name="item-name" data-i="'+element['id']+'" value="'+element['name']+'"><tr>';
+                    result += '<tr><input type="file" name="item-photo" data-i="'+element['id']+'"><tr>';
+                    result += '<tr><span class="material-icons" name="item-delete" style="cursor: pointer" data="'+element['id']+'">delete</span><tr>';
+                    result += '</th>';
                 });
                 $('select[name="js-category"]').removeAttr("disabled");
                 $('button[name="js-catalog-delete"]').removeAttr("disabled");

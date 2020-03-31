@@ -241,4 +241,10 @@ class CatalogController extends Controller
         $categories = Category::where('catalog_id', $request->catalog)->get();
         return response()->json($categories, 200);
     }
+
+    public function getItems(Request $request)
+    {
+        $items = Item::where('category_id', $request->category)->get();
+        return response()->json($items, 200);
+    }
 }
