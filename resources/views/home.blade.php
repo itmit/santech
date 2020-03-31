@@ -67,7 +67,7 @@
                     <br>
 
                     <div class="d-lg-table-row">
-                        <table class="table-bordered" style="display: none; width: 100%">
+                        <table class="table-bordered" style="display: none; width: 100%; text-align: center">
                             <thead style="width: 100%">
                             <tr>
                                 <th scope="col">Наименование</th>
@@ -135,7 +135,7 @@
                     result += '<td><input type="text" name="item-name" data-i="'+element['id']+'" value="'+element['name']+'"></td>';
                     result += '<td><input type="file" name="item-photo" data-i="'+element['id']+'"></td>';
                     result += '<td><button data-i="'+element['id']+'">сохранить</button></td>';
-                    result += '<td><span class="material-icons" name="item-delete" style="cursor: pointer" data="'+element['id']+'">delete</span></td>';
+                    result += '<td><span class="material-icons" name="item-delete" style="cursor: pointer" data-i="'+element['id']+'">delete</span></td>';
                     result += '</tr>';
                 });
                 $('button[name="js-category-delete"]').removeAttr("disabled");
@@ -227,6 +227,28 @@
                     console.log("Error: " + xhr + " " + err);
                 }
             });
+        })
+
+        $(document).on('click', 'span[name="item-delete"]', function() {
+            let isDelete = confirm("Удалить материал?");
+            if(isDelete)
+            {
+                let item = $(this).data('i');
+                let elem = $(this).closest('tr');
+                $.ajax({
+                    headers : {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+                    dataType: "json",
+                    url     : 'catalog/deleteItem',
+                    data    : {item: item},
+                    method    : 'post',
+                    success: function (response) {
+                        elem.remove();
+                    },
+                    error: function (xhr, err) { 
+                        console.log("Error: " + xhr + " " + err);
+                    }
+                });
+            }
         })
     })
 </script>

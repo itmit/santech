@@ -297,4 +297,15 @@ class CatalogController extends Controller
         ]);
         return response()->json('Renamed', 200);
     }
+
+    public function deleteItem(Request $request)
+    {
+        $item = Item::where('id', $request->item)->first();
+        $nodeitems = NodeItem::where('item_id', $item->id)->get();
+        foreach ($nodeitems as $nodeitem) {
+            $nodeitem->delete();
+        }
+        $item->delete();
+        return response()->json('Deleted', 200);
+    }
 }

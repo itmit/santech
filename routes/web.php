@@ -30,3 +30,4 @@ Route::post('catalog/deleteCatalog', 'Web\CatalogController@deleteCatalog')->nam
 Route::post('catalog/renameCatalog', 'Web\CatalogController@renameCatalog')->name('renameCatalog');
 Route::post('catalog/deleteCategory', 'Web\CatalogController@deleteCategory')->name('deleteCategory');
 Route::post('catalog/renameCategory', 'Web\CatalogController@renameCategory')->name('renameCategory');
+Route::post('catalog/deleteItem', 'Web\CatalogController@deleteItem')->name('deleteItem');
