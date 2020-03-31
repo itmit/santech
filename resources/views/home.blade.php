@@ -40,15 +40,31 @@
                             </button>
                         </div>
                     </form>
-                    <select name="" id="">
+                    <hr>
+                    <select name="js-catalog" id="js-catalog">
                         <option value="" selected disabled>Выберите каталог</option>
                         @foreach ($catalogs as $catalog)
-                        <option value="{{$catalog->id}}">{{$catalog->name}}</option>
+                            <option value="{{$catalog->id}}">{{$catalog->name}}</option>
                         @endforeach
+                    </select>
+                    <select name="js-category" id="js-category" disabled>
+                        <option value="" selected disabled>Выберите каталог</option>
+                        {{-- @foreach ($catalogs as $catalog)
+                            <option value="{{$catalog->id}}">{{$catalog->name}}</option>
+                        @endforeach --}}
                     </select>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+<script>
+    $(document).ready(function() {
+        $(document).on('change', 'select[name="js-catalog"]', function() {
+            $('select[name="js-category"]').removeAttr("disabled");
+        })
+    })
+</script>
+
 @endsection
