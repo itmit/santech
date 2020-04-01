@@ -111,6 +111,7 @@ class EntityApiController extends ApiBaseController
             $items = [];
             foreach ($node->getItems() as $item) {
                 $items[] = [
+                    'uuid' => $item->node_item_uuid,
                     'name' => $item->name,
                     'count' => $item->count,
                     'amount' => $item->amount,
