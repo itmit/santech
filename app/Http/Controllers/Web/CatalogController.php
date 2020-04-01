@@ -73,7 +73,7 @@ class CatalogController extends Controller
             $import = self::storeCatalogFromZip();
         }
         else return 'false';
-        dd($import);
+        return view('home');
     }
 
     public function storeCatalogFromZip()
@@ -233,7 +233,7 @@ class CatalogController extends Controller
             }
         }
         // return $categories;
-        return view('home');
+        return true;
     }
 
     public function getCategories(Request $request)
