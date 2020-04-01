@@ -339,7 +339,7 @@ class EntityApiController extends ApiBaseController
                 $tmp['amount'][]=$item['amount'];
                 $tmp['price'][]=$item['price'];
         }
-        array_multisort($tmp['name'],SORT_ASC,$estimate);//,$tmp['sort'],SORT_DESC,$out);
+        if(count($tmp) > 1) array_multisort($tmp['name'],SORT_ASC,$estimate);//,$tmp['sort'],SORT_DESC,$out);
 
         return $this->sendResponse($estimate, "Estimate");
     }
