@@ -233,7 +233,7 @@ class CatalogController extends Controller
             }
         }
         // return $categories;
-        return true;
+        return view('home');
     }
 
     public function getCategories(Request $request)
