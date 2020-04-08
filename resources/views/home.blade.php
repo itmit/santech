@@ -158,6 +158,7 @@
             let id = $(this).data('i');
             let name = $('input[name="item-name"][data-i="'+id+'"]').val();
             let file = $('input[name="js-photo"][data-i="'+id+'"]').files;
+            let formData = new FormData();
             formData.append("photo", file);
             fetch('/upload/image', {method: "POST", body: formData});
             console.log(name + ' ' + file);
