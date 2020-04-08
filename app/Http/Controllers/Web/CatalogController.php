@@ -309,6 +309,11 @@ class CatalogController extends Controller
         return response()->json('Deleted', 200);
     }
 
+    public function show($id)
+    {
+        
+    }
+
     public function updateItem(Request $request)
     {
         dd($request);

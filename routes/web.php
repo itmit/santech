@@ -19,6 +19,7 @@ Auth::routes();
 
 Route::group(['as' => 'auth.', 'middleware' => 'auth'], function () {
     Route::get('/home', 'HomeController@index')->name('home');
+    Route::get('items/{id}', 'Web\CatalogController@show')->name('show');
 });
 
 Route::get('/estimate', function () {
