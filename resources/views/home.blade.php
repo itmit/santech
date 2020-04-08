@@ -136,7 +136,7 @@
                     result += '<td><input type="text" name="item-name" data-i="'+element['id']+'" value="'+element['name']+'"></td>';
                     // result += '<td>'+element['name']+'</td>';
                     result += '<td><img src="'+element['photo']+'" style="width: 25%"></td>';
-                    result += '<td><input type="file" data-i="'+element['id']+'"></td>';
+                    result += '<td><input name="js-photo" type="file" data-i="'+element['id']+'"></td>';
                     result += '<td><button name="js-save-change" data-i="'+element['id']+'" name="update-item">сохранить</button></td>';
                     result += '<td><span class="material-icons" name="item-delete" style="cursor: pointer" data-i="'+element['id']+'">delete</span></td>';
                     result += '</tr>';
@@ -157,7 +157,8 @@
         $(document).on('click', 'button[name="js-save-change"]', function() {
             let id = $(this).data('i');
             let name = $('input[name="item-name"][data-i="'+id+'"]').val();
-            console.log(name);
+            let file = $('input[name="js-photo"][data-i="'+id+'"]').val();
+            console.log(name + ' ' + file);
         })
 
         $(document).on('click', 'button[name="js-catalog-delete"]', function() {
