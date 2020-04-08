@@ -157,7 +157,7 @@
         $(document).on('click', 'button[name="js-save-change"]', function() {
             let id = $(this).data('i');
             let name = $('input[name="item-name"][data-i="'+id+'"]').val();
-            let file = $('input[name="js-photo"][data-i="'+id+'"]').files[1];
+            let file = $('input[name="js-photo"][data-i="'+id+'"]').file;
             let formData = new FormData();
             formData.append("photo", file);
             fetch('/storage/catalog/category/item', {method: "POST", body: formData});
