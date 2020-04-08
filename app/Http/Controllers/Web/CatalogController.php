@@ -320,7 +320,7 @@ class CatalogController extends Controller
         if($request->file('photo') != null)
         {
             $file = $request->file('photo');
-            $file->storeAs('/storage/catalog/category/item/', $item->uuid.'.jpg');
+            $file->storeAs('public/catalog/category/item/', $item->uuid.'.jpg');
             $p2 = '/storage/catalog/category/item/' . $item->uuid . '.jpg';
         }
         else
