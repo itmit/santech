@@ -137,7 +137,7 @@
                     // result += '<td>'+element['name']+'</td>';
                     result += '<td><img src="'+element['photo']+'" style="width: 25%"></td>';
                     result += '<td><input type="file" data-i="'+element['id']+'"></td>';
-                    result += '<td><button data-i="'+element['id']+'" name="update-item">сохранить</button></td>';
+                    result += '<td><button name="js-save-change" data-i="'+element['id']+'" name="update-item">сохранить</button></td>';
                     result += '<td><span class="material-icons" name="item-delete" style="cursor: pointer" data-i="'+element['id']+'">delete</span></td>';
                     result += '</tr>';
                 });
@@ -152,6 +152,12 @@
                 console.log("Error: " + xhr + " " + err);
             }
         });
+        })
+
+        $(document).on('click', 'button[name="js-save-change"]', function() {
+            let id = $(this).data('i');
+            let name = $('input[name="item-name" data-i="'+id+'"]');
+            console.log(name);
         })
 
         $(document).on('click', 'button[name="js-catalog-delete"]', function() {
