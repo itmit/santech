@@ -156,7 +156,7 @@
 
         $(document).on('click', 'button[name="js-save-change"]', function() {
             let id = $(this).data('i');
-            let name = $('input[name="item-name" data-i="'+id+'"]');
+            let name = $('input[name="item-name"][data-i="'+id+'"]').val();
             console.log(name);
         })
 
