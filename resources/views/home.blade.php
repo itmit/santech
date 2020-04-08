@@ -139,7 +139,7 @@
                     result += '<td><input name="js-photo" type="file" data-i="'+element['id']+'"></td>';
                     result += '<td><button type="submit" name="js-save-change" data-i="'+element['id']+'" name="update-item">сохранить</button></td>';
                     result += '<td><span class="material-icons" name="item-delete" style="cursor: pointer" data-i="'+element['id']+'">delete</span></td>';
-                    result += '</tr></form>';
+                    result += '</form></tr>';
                 });
                 $('button[name="js-category-delete"]').removeAttr("disabled");
                 $('button[name="js-category-rename"]').removeAttr("disabled");
