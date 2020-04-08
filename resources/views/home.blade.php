@@ -154,11 +154,6 @@
         });
         })
 
-        $(document).on('click', 'button[name="js-save-change"]', function() {
-
-            console.log(name + ' ' + file);
-        })
-
         $(document).on('click', 'button[name="js-catalog-delete"]', function() {
             let isDelete = confirm("Удалить каталог? При удалении будут удалены все категории и материалы!");
             if(isDelete)
