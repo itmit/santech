@@ -311,7 +311,7 @@ class CatalogController extends Controller
 
     public function show($id)
     {
-        return view('itemDetail', ['item' => Item::where('id', $id)]);
+        return view('itemDetail', ['item' => Item::where('id', $id)->first()]);
     }
 
     public function updateItem(Request $request)
