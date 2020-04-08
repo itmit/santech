@@ -15,7 +15,7 @@
                     @endif
 
                     <div>
-                    <form class="form-horizontal" method="POST" enctype="multipart/form-data" action="{{ route('updateItem') }}">
+                    <form class="form-horizontal" method="POST" enctype="multipart/form-data" action="{{ route('updateItem', ['id' => $id]) }}">
                         {{ csrf_field() }}
                         <div class="row">
                             <input type="text" name="name" value="{{$item->name}}" class="form-control" require>
