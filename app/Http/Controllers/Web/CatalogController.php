@@ -330,6 +330,6 @@ class CatalogController extends Controller
             'name' => $request->name,
             'photo' => $path
         ]);
-        return view('itemDetail', ['item' => Item::where('id', $id)->first()]);
+        return view('itemDetail', ['item' => Item::where('id', $id)->first(), 'id' => $id]);
     }
 }
