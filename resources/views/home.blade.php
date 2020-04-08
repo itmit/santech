@@ -132,14 +132,15 @@
                 $('table > td').remove();
                 result = '';
                 response.forEach(element => {
-                    result += '<form class="form-horizontal" method="POST" enctype="multipart/form-data" action="{{ route("updateItem") }}"><tr>';
+                    result += '<tr>';
+                    result += '<form class="form-horizontal" method="POST" enctype="multipart/form-data" action="{{ route("updateItem") }}">';
                     result += '<td><input type="text" name="item-name" data-i="'+element['id']+'" value="'+element['name']+'"></td>';
-                    // result += '<td>'+element['name']+'</td>';
                     result += '<td><img src="'+element['photo']+'" style="width: 25%"></td>';
                     result += '<td><input name="js-photo" type="file" data-i="'+element['id']+'"></td>';
                     result += '<td><button type="submit" name="js-save-change" data-i="'+element['id']+'" name="update-item">сохранить</button></td>';
                     result += '<td><span class="material-icons" name="item-delete" style="cursor: pointer" data-i="'+element['id']+'">delete</span></td>';
-                    result += '</tr></form>';
+                    result += '</form>';
+                    result += '</tr>';
                 });
                 $('button[name="js-category-delete"]').removeAttr("disabled");
                 $('button[name="js-category-rename"]').removeAttr("disabled");
