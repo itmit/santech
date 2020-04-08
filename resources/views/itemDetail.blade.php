@@ -18,13 +18,13 @@
                     <form class="form-horizontal" method="POST" enctype="multipart/form-data" action="{{ route('updateItem') }}">
                         {{ csrf_field() }}
                         <div class="row">
-                            <input type="text" name="name" value="{{$item->name}}">
+                            <input type="text" name="name" value="{{$item->name}}" class="form-control" require>
                         </div>
                         <div class="row">
-                            <img src="{{$item->photo}}">
+                            <img src="{{$item->photo}}" class="form-control">
                         </div>
                         <div class="row">
-                            <input type="file" name="photo">
+                            <input type="file" name="photo" class="form-control">
                         </div>
                         <div class="row">
                             <input type="submit" value="Сохранить">

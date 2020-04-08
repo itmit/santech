@@ -314,7 +314,7 @@ class CatalogController extends Controller
         return view('itemDetail', ['item' => Item::where('id', $id)->first()]);
     }
 
-    public function updateItem(Request $request)
+    public function updateItem(Request $request, $id)
     {
         dd($request);
         // $item = Item::where('id', $request->item)->first();
@@ -323,6 +323,6 @@ class CatalogController extends Controller
         //     $nodeitem->delete();
         // }
         // $item->delete();
-        // return response()->json('Deleted', 200);
+        return view('itemDetail', ['item' => Item::where('id', $id)->first()]);
     }
 }
