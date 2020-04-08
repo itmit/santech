@@ -157,7 +157,8 @@
         $(document).on('click', 'button[name="js-save-change"]', function() {
             let id = $(this).data('i');
             let name = $('input[name="item-name"][data-i="'+id+'"]').val();
-            let file = $('input[name="js-photo"][data-i="'+id+'"]').val();
+            let file = $('input[name="js-photo"][data-i="'+id+'"]').files[0];
+            let formData = new FormData();
             console.log(name + ' ' + file);
         })
 
