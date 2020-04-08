@@ -316,13 +316,20 @@ class CatalogController extends Controller
 
     public function updateItem(Request $request, $id)
     {
-        dd($request);
-        // $item = Item::where('id', $request->item)->first();
-        // $nodeitems = NodeItem::where('item_id', $item->id)->get();
-        // foreach ($nodeitems as $nodeitem) {
-        //     $nodeitem->delete();
-        // }
-        // $item->delete();
+        $item = Item::where('id', $id)->first();
+        if($request->file('photo') != null)
+        {
+            $file = $request->file('photo');
+            $path = $file->storeAs('/app/public/catalog/category/item/', $uuid.'.jpg');
+        }
+        else
+        {
+            $path = $item->photo;
+        }
+        $item->update([
+            'name' => $request->name,
+            'photo' => $path
+        ]);
         return view('itemDetail', ['item' => Item::where('id', $id)->first()]);
     }
 }
