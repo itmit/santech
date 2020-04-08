@@ -72,6 +72,7 @@
                             <tr>
                                 <th scope="col">Наименование</th>
                                 <th scope="col">Фото</th>
+                                <th scope="col">Загрузить</th>
                                 <th scope="col">Сохранить</th>
                                 <th scope="col">Удалить</th>
                             </tr>
@@ -135,6 +136,7 @@
                     result += '<td><input type="text" name="item-name" data-i="'+element['id']+'" value="'+element['name']+'"></td>';
                     // result += '<td>'+element['name']+'</td>';
                     result += '<td><img src="'+element['photo']+'" style="width: 25%"></td>';
+                    result += '<td><input type="file" data-i="'+element['id']+'"></td>';
                     result += '<td><button data-i="'+element['id']+'" name="update-item">сохранить</button></td>';
                     result += '<td><span class="material-icons" name="item-delete" style="cursor: pointer" data-i="'+element['id']+'">delete</span></td>';
                     result += '</tr>';
