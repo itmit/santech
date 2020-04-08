@@ -21,7 +21,7 @@
                             <input type="text" name="name" value="{{$item->name}}" class="form-control" require>
                         </div>
                         <div class="row">
-                            <img src="{{$item->photo}}">
+                            <img src="{{$item->photo}}" style="width: 25%">
                         </div>
                         <div class="row">
                             <input type="file" name="photo" class="form-control">
