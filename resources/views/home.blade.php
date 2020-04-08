@@ -66,7 +66,7 @@
                     
                     <br>
 
-                    <div class="d-lg-table-row">
+                    <div class>
                         <table class="table-bordered" style="display: none; width: 100%; text-align: center">
                             <thead style="width: 100%">
                             <tr>
@@ -146,7 +146,7 @@
                 $('input[name="js-category-name"]').removeAttr("disabled");
                 $('input[name="js-category-name"]').val(text);
                 $('tbody').html(result);
-                $('table').css('display', 'block');
+                $('table').css('display', 'table');
             },
             error: function (xhr, err) { 
                 console.log("Error: " + xhr + " " + err);
@@ -155,9 +155,7 @@
         })
 
         $(document).on('click', 'button[name="js-save-change"]', function() {
-            let id = $(this).data('i');
-            let name = $('input[name="item-name"][data-i="'+id+'"]').val();
-            let file = $('input[name="js-photo"][data-i="'+id+'"]').file();
+
             console.log(name + ' ' + file);
         })
 
