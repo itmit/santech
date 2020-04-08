@@ -320,15 +320,16 @@ class CatalogController extends Controller
         if($request->file('photo') != null)
         {
             $file = $request->file('photo');
-            $path = $file->storeAs('/app/public/catalog/category/item', $item->uuid.'.jpg');
+            $file->storeAs('/app/public/catalog/category/item', $item->uuid.'.jpg');
+            $p2 = '/storage/catalog/category/item/' . $item->uuid . '.jpg';
         }
         else
         {
-            $path = $item->photo;
+            $p2 = $item->photo;
         }
         $item->update([
             'name' => $request->name,
-            'photo' => $path
+            'photo' => $p2
         ]);
         return view('itemDetail', ['item' => Item::where('id', $id)->first(), 'id' => $id]);
     }
