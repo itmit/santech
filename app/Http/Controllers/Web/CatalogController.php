@@ -73,7 +73,7 @@ class CatalogController extends Controller
             $import = self::storeCatalogFromZip();
         }
         else return 'false';
-        return redirect()->route('home');
+        return redirect()->route('auth.home');
     }
 
     public function storeCatalogFromZip()
